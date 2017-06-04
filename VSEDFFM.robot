@@ -13,19 +13,25 @@ ${Host}             10.2.3.72
 ${Username}         root
 ${Password}         netbay@123
 
+# Change data for test
+${Indicator}        EXPORT
+${fileName}         MFI_DataTest 
+${FlightNo}         TG 625
+${FlightDate}       01062017
+
 
 *** Testcases ***
-Put Message MFI From Local to Server
-      Put File From Local to Server             EXPORT      FFM_DataTest
-      Check File in Server should visible       FFM_DataTest    
-      Prepare message to test                   FFM_DataTest        TG 625      04062017
+Put Message FFM From Local to Server
+      Put File From Local to Server             ${Indicator}      ${fileName}
+      Check File in Server should visible       ${fileName}   
+      Prepare message to test                   ${fileName}       ${FlightNo}       ${FlightDate}
 
-# Parser Message MFI and Generate XML to Output folder
-#       Run Script aim_main to parser Message
-#       Check input path File should delete
-#       File should transfer in backup folder
-#       Check database Flight should status Send
-#       Output folder should visible XML Files
+Parser Message FFM and Generate XML to Output folder
+      Run Script aim_main to parser Message
+      Check File should delete in Input path              ${fileName} 
+      Check File should transfer in backup folder         ${fileName} 
+      Check database Flight should insert and status is Send      22        ${FlightNo}           ${FlightDate}
+      Output folder should visible XML File               ${FlightNo}       ${FlightDate}
 
 # Sign XML File and Send to gateway
 #       Run Script sign XML to send gateway
