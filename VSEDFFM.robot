@@ -6,6 +6,9 @@ Resource    Resource/keyword.robot
 Suite Setup            Open Connection And Log In
 Suite Teardown         Close All Connections
 
+Test Setup              Connect To Database AirManifest
+Test Teardown           Disconnect From Database
+
 *** Variables ***
 
 #Connection Info
@@ -15,9 +18,9 @@ ${Password}         netbay@123
 
 # Change data for test
 ${Indicator}        EXPORT
-${fileName}         MFI_DataTest 
-${FlightNo}         TG 625
-${FlightDate}       01062017
+${fileName}         FFM_DataTest
+${FlightNo}         TG 600
+${FlightDate}       05JUN
 
 
 *** Testcases ***
@@ -30,8 +33,8 @@ Parser Message FFM and Generate XML to Output folder
       Run Script aim_main to parser Message
       Check File should delete in Input path              ${fileName} 
       Check File should transfer in backup folder         ${fileName} 
-      Check database Flight should insert and status is Send      22        ${FlightNo}           ${FlightDate}
-      Output folder should visible XML File               ${FlightNo}       ${FlightDate}
+      Check database Flight should insert and status is Send      22        ${FlightNo}       ${FlightDate}
+      Output folder should visible XML File                       22        ${FlightNo}       ${FlightDate}
 
 # Sign XML File and Send to gateway
 #       Run Script sign XML to send gateway
@@ -51,9 +54,44 @@ Open Connection And Log In
 Prepare message to test 
     [Arguments]        ${fileName}      ${flight}       ${FlightDate}
     SSHLibrary.Start Command    cat /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt
-    ${GetContentVSED}=    Read Command Output
-    ${Old_flightNo}=    String.Get Substring    ${GetContentVSED}       3        9
-    ${Old_flightDate}=    String.Get Substring    ${GetContentVSED}    10       18
+    ${GetContentVSED}       Read Command Output
+    ${GetLineContent}       Get Line        ${GetContentVSED}       1
 
-    SSHLibrary.Execute Command    replace "${Old_flightNo}" "${flight}" -- /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt
+    ${Old_flightNo}         String.Get Substring        ${GetLineContent}       2        8
+    ${Old_flightDate}       String.Get Substring        ${GetLineContent}       9       14
+    ${Old_flightDate2}      String.Get Substring        ${GetLineContent}       32      37
+
+    ${New_flightNo}         String.Replace String       ${flight}       ${SPACE}        0
+
+    SSHLibrary.Execute Command    replace "${Old_flightNo}" "${New_flightNo}" -- /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt
     SSHLibrary.Execute Command    replace "${Old_flightDate}" "${FlightDate}" -- /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt
+    SSHLibrary.Execute Command    replace "${Old_flightDate2}" "${FlightDate}" -- /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt
+
+
+Check database Flight should insert and status is Send
+    [Arguments]      ${Indicator}       ${FlightNo}     ${FlightDate}
+        ${FlightNoToQuery}      Remove String           ${FlightNo}         ${SPACE}
+        
+        ${ConvFlightDate}               Convert Date                ${FlightDate}           date_format=%d%b
+        ${FlightDateResult}             String.Get Substring        ${ConvFlightDate}       0     10
+        ${CurrentDate}                  Get Current Date
+        ${FlightDateReplaceYear}        String.Get Substring        ${CurrentDate}          0       4
+        ${FlightDateToQuery}            String.Replace String       ${FlightDateResult}     1900        ${FlightDateReplaceYear}
+                
+        ${FlightData}    Query    SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' and vsedhead.VH_DocumentType = '${Indicator}'
+        Should Be Equal     ${FlightData[0][0]}    Sent
+
+
+Output folder should visible XML File
+    [Arguments]       ${Indicator}      ${FlightNo}     ${FlightDate}
+        ${FlightNoToQuery}      Remove String           ${FlightNo}         ${SPACE}
+        
+        ${ConvFlightDate}               Convert Date                ${FlightDate}           date_format=%d%b
+        ${FlightDateResult}             String.Get Substring        ${ConvFlightDate}       0     10
+        ${CurrentDate}                  Get Current Date
+        ${FlightDateReplaceYear}        String.Get Substring        ${CurrentDate}          0       4
+        ${FlightDateToQuery}            String.Replace String       ${FlightDateResult}     1900        ${FlightDateReplaceYear}
+    
+        ${DocumentNo}    Query    SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' and vsedhead.VH_DocumentType = '${Indicator}'
+
+        SSHLibrary.File Should Exist    /var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_${DocumentNo[0][0]}.xml

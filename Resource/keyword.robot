@@ -39,29 +39,6 @@ Check File should transfer in backup folder
 
     SSHLibrary.File Should Exist    /var/www/html/manifest/AIM_Files/Input_TG/backup/${Year}_${Month}_${Date}/${fileName}.txt
 
-
-Check database Flight should insert and status is Send
-    [Arguments]      ${Indicator}       ${FlightNo}     ${FlightDate}
-        ${FlightNoToQuery}      Remove String           ${FlightNo}         ${SPACE}
-        ${ConvFlightDate}       Convert Date            ${FlightDate}       date_format=%d%m%Y
-        ${FlightDateToQuery}    String.Get Substring    ${ConvFlightDate}       0     10
-    
-        ${FlightData}    Query    SELECT vsedhead.VH_DocumentType,vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}'
-        Should Be Equal    ${FlightData[0][0]}    ${Indicator}
-        Should Be Equal    ${FlightData[0][1]}    Sent
-
-
-Output folder should visible XML File
-    [Arguments]       ${FlightNo}     ${FlightDate}
-        ${FlightNoToQuery}      Remove String           ${FlightNo}         ${SPACE}
-        ${ConvFlightDate}       Convert Date            ${FlightDate}       date_format=%d%m%Y
-        ${FlightDateToQuery}    String.Get Substring    ${ConvFlightDate}       0     10
-    
-        ${DocumentNo}    Query    SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}'
-
-        SSHLibrary.File Should Exist    /var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_${DocumentNo[0][0]}.xml
-
-
 Run Script sign XML to send gateway
      ${SignScript}=    SSHLibrary.Execute Command    cd /var/www/html/manifest/AIM_Files/signManifestHttpOpt/ ; java -Dfile.encoding=utf-8 -jar SignOnlyHttpOption.jar -s /var/www/html/manifest/AIM_Files/Output_XML/TG -o /var/netbay/vas/ebxml/home/tg_test199/inbox -c /var/www/html/manifest/AIM_Files/CER/THAI_AIRWAYS.p12 -p 'Thaiair*7'
      Log to console    ${SignScript}

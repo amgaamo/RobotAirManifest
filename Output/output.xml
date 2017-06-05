@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20170606 01:48:36.848" generator="Robot 3.0.2 (Python 2.7.13 on win32)">
+<suite source="D:\AutomateTest\RobotFramework\AirManifest\VSEDFFM.robot" id="s1" name="VSEDFFM">
+<kw type="setup" name="Open Connection And Log In">
+<kw name="Open Connection" library="SSHLibrary">
+<doc>Opens a new SSH connection to the given `host` and `port`.</doc>
+<arguments>
+<arg>${Host}</arg>
+<arg>port=22</arg>
+</arguments>
+<status status="PASS" endtime="20170606 01:48:36.983" starttime="20170606 01:48:36.983"></status>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<doc>Logs into the SSH server with the given `username` and `password`.</doc>
+<arguments>
+<arg>${Username}</arg>
+<arg>${Password}</arg>
+<arg>delay=0.5</arg>
+</arguments>
+<msg timestamp="20170606 01:48:36.984" level="INFO">Logging into '10.2.3.72:22' as 'root'.</msg>
+<msg timestamp="20170606 01:48:38.795" level="INFO">Read output: Last login: Tue Jun  6 01:48:13 2017 from 10.0.66.118
+[root@swebmf_uat ~]#</msg>
+<status status="PASS" endtime="20170606 01:48:38.796" starttime="20170606 01:48:36.983"></status>
+</kw>
+<status status="PASS" endtime="20170606 01:48:38.797" starttime="20170606 01:48:36.982"></status>
+</kw>
+<test id="s1-t1" name="Put Message FFM From Local to Server">
+<kw type="setup" name="Connect To Database AirManifest" library="keyword">
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to</doc>
+<arguments>
+<arg>pymysql</arg>
+<arg>manifest_air_test</arg>
+<arg>pattaraporn</arg>
+<arg>pattaraporn@netbay</arg>
+<arg>10.1.3.72</arg>
+<arg>3306</arg>
+</arguments>
+<msg timestamp="20170606 01:48:38.853" level="INFO">Connecting using : pymysql.connect(db=manifest_air_test, user=pattaraporn, passwd=pattaraporn@netbay, host=10.1.3.72, port=3306, charset=None) </msg>
+<status status="PASS" endtime="20170606 01:48:39.047" starttime="20170606 01:48:38.804"></status>
+</kw>
+<status status="PASS" endtime="20170606 01:48:39.048" starttime="20170606 01:48:38.803"></status>
+</kw>
+<kw name="Put File From Local to Server" library="keyword">
+<arguments>
+<arg>${Indicator}</arg>
+<arg>${fileName}</arg>
+</arguments>
+<kw name="Put File" library="SSHLibrary">
+<doc>Uploads file(s) from the local machine to the remote machine.</doc>
+<arguments>
+<arg>D:\\AutomateTest\\RobotFramework\\AirManifest\\Resource\\DataTestMSG\\${Indicator}\\${fileName}.txt</arg>
+<arg>destination=/var/www/html/manifest/AIM_Files/Input_TG</arg>
+<arg>mode=0744</arg>
+</arguments>
+<msg timestamp="20170606 01:48:39.210" level="INFO">[chan 1] Opened sftp connection (server version 3)</msg>
+<msg timestamp="20170606 01:48:39.738" level="INFO">'D:\AutomateTest\RobotFramework\AirManifest\Resource\DataTestMSG\EXPORT\FFM_DataTest.txt' -&gt; '/var/www/html/manifest/AIM_Files/Input_TG/FFM_DataTest.txt'</msg>
+<status status="PASS" endtime="20170606 01:48:39.738" starttime="20170606 01:48:39.055"></status>
+</kw>
+<status status="PASS" endtime="20170606 01:48:39.738" starttime="20170606 01:48:39.050"></status>
+</kw>
+<kw name="Check File in Server should visible" library="keyword">
+<arguments>
+<arg>${fileName}</arg>
+</arguments>
+<kw name="File Should Exist" library="SSHLibrary">
+<doc>Fails if the given `path` does NOT point to an existing file.</doc>
+<arguments>
+<arg>/var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt</arg>
+</arguments>
+<status status="PASS" endtime="20170606 01:48:39.775" starttime="20170606 01:48:39.740"></status>
+</kw>
+<status status="PASS" endtime="20170606 01:48:39.775" starttime="20170606 01:48:39.739"></status>
+</kw>
+<kw name="Prepare message to test">
+<arguments>
+<arg>${fileName}</arg>
+<arg>${FlightNo}</arg>
+<arg>${FlightDate}</arg>
+</arguments>
+<kw name="Start Command" library="SSHLibrary">
+<doc>Starts execution of the `command` on the remote machine and returns immediately.</doc>
+<arguments>
+<arg>cat /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt</arg>
+</arguments>
+<msg timestamp="20170606 01:48:39.777" level="INFO">Starting command 'cat /var/www/html/manifest/AIM_Files/Input_TG/FFM_DataTest.txt'.</msg>
+<status status="PASS" endtime="20170606 01:48:39.892" starttime="20170606 01:48:39.777"></status>
+</kw>
+<kw name="Read Command Output" library="SSHLibrary">
+<doc>Returns outputs of the most recent started command.</doc>
+<assign>
+<var>${GetContentVSED}</var>
+</assign>
+<msg timestamp="20170606 01:48:39.895" level="INFO">Reading output of command 'cat /var/www/html/manifest/AIM_Files/Input_TG/FFM_DataTest.txt'.</msg>
+<msg timestamp="20170606 01:48:39.905" level="INFO">Command exited with return code 0.</msg>
+<msg timestamp="20170606 01:48:39.907" level="INFO">${GetContentVSED} = FFM/8
+1/TG0600/29MAY0040/BKK/HSTNF/CH/29MAY2040/ZRH
+ZRH/04JUN0725
+ULD/AAF47038TG
+217-02950135BKKZRH/T38K298.0MC3.00/VEGETABLE
+/PER
+217-02950124BKKZRH/T93K516.0MC4.00/VEGETABLE
+/PER
+217-0295014...</msg>
+<status status="PASS" endtime="20170606 01:48:39.907" starttime="20170606 01:48:39.894"></status>
+</kw>
+<kw name="Get Line" library="String">
+<doc>Returns the specified line from the given ``string``.</doc>
+<arguments>
+<arg>${GetContentVSED}</arg>
+<arg>1</arg>
+</arguments>
+<assign>
+<var>${GetLineContent}</var>
+</assign>
+<msg timestamp="20170606 01:48:39.910" level="INFO">${GetLineContent} = 1/TG0600/29MAY0040/BKK/HSTNF/CH/29MAY2040/ZRH</msg>
+<status status="PASS" endtime="20170606 01:48:39.910" starttime="20170606 01:48:39.908"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${GetLineContent}</arg>
+<arg>2</arg>
+<arg>8</arg>
+</arguments>
+<assign>
+<var>${Old_flightNo}</var>
+</assign>
+<msg timestamp="20170606 01:48:39.913" level="INFO">${Old_flightNo} = TG0600</msg>
+<status status="PASS" endtime="20170606 01:48:39.914" starttime="20170606 01:48:39.911"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${GetLineContent}</arg>
+<arg>9</arg>
+<arg>14</arg>
+</arguments>
+<assign>
+<var>${Old_flightDate}</var>
+</assign>
+<msg timestamp="20170606 01:48:39.916" level="INFO">${Old_flightDate} = 29MAY</msg>
+<status status="PASS" endtime="20170606 01:48:39.916" starttime="20170606 01:48:39.915"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${GetLineContent}</arg>
+<arg>32</arg>
+<arg>37</arg>
+</arguments>
+<assign>
+<var>${Old_flightDate2}</var>
+</assign>
+<msg timestamp="20170606 01:48:39.918" level="INFO">${Old_flightDate2} = 29MAY</msg>
+<status status="PASS" endtime="20170606 01:48:39.918" starttime="20170606 01:48:39.917"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${flight}</arg>
+<arg>${SPACE}</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${New_flightNo}</var>
+</assign>
+<msg timestamp="20170606 01:48:39.920" level="INFO">${New_flightNo} = TG0600</msg>
+<status status="PASS" endtime="20170606 01:48:39.921" starttime="20170606 01:48:39.919"></status>
+</kw>
+<kw name="Execute Command" library="SSHLibrary">
+<doc>Executes `command` on the remote machine and returns its outputs.</doc>
+<arguments>
+<arg>replace "${Old_flightNo}" "${New_flightNo}" -- /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt</arg>
+</arguments>
+<msg timestamp="20170606 01:48:39.923" level="INFO">Executing command 'replace "TG0600" "TG0600" -- /var/www/html/manifest/AIM_Files/Input_TG/FFM_DataTest.txt'.</msg>
+<msg timestamp="20170606 01:48:40.078" level="INFO">Command exited with return code 0.</msg>
+<status status="PASS" endtime="20170606 01:48:40.079" starttime="20170606 01:48:39.922"></status>
+</kw>
+<kw name="Execute Command" library="SSHLibrary">
+<doc>Executes `command` on the remote machine and returns its outputs.</doc>
+<arguments>
+<arg>replace "${Old_flightDate}" "${FlightDate}" -- /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt</arg>
+</arguments>
+<msg timestamp="20170606 01:48:40.082" level="INFO">Executing command 'replace "29MAY" "05JUN" -- /var/www/html/manifest/AIM_Files/Input_TG/FFM_DataTest.txt'.</msg>
+<msg timestamp="20170606 01:48:40.232" level="INFO">Command exited with return code 0.</msg>
+<status status="PASS" endtime="20170606 01:48:40.233" starttime="20170606 01:48:40.080"></status>
+</kw>
+<kw name="Execute Command" library="SSHLibrary">
+<doc>Executes `command` on the remote machine and returns its outputs.</doc>
+<arguments>
+<arg>replace "${Old_flightDate2}" "${FlightDate}" -- /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt</arg>
+</arguments>
+<msg timestamp="20170606 01:48:40.236" level="INFO">Executing command 'replace "29MAY" "05JUN" -- /var/www/html/manifest/AIM_Files/Input_TG/FFM_DataTest.txt'.</msg>
+<msg timestamp="20170606 01:48:40.388" level="INFO">Command exited with return code 0.</msg>
+<status status="PASS" endtime="20170606 01:48:40.389" starttime="20170606 01:48:40.234"></status>
+</kw>
+<status status="PASS" endtime="20170606 01:48:40.389" starttime="20170606 01:48:39.776"></status>
+</kw>
+<kw type="teardown" name="Disconnect From Database" library="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<msg timestamp="20170606 01:48:40.394" level="INFO">Executing : Disconnect From Database</msg>
+<status status="PASS" endtime="20170606 01:48:40.395" starttime="20170606 01:48:40.393"></status>
+</kw>
+<status status="PASS" endtime="20170606 01:48:40.397" critical="yes" starttime="20170606 01:48:38.798"></status>
+</test>
+<test id="s1-t2" name="Parser Message FFM and Generate XML to Output folder">
+<kw type="setup" name="Connect To Database AirManifest" library="keyword">
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to</doc>
+<arguments>
+<arg>pymysql</arg>
+<arg>manifest_air_test</arg>
+<arg>pattaraporn</arg>
+<arg>pattaraporn@netbay</arg>
+<arg>10.1.3.72</arg>
+<arg>3306</arg>
+</arguments>
+<msg timestamp="20170606 01:48:40.413" level="INFO">Connecting using : pymysql.connect(db=manifest_air_test, user=pattaraporn, passwd=pattaraporn@netbay, host=10.1.3.72, port=3306, charset=None) </msg>
+<status status="PASS" endtime="20170606 01:48:40.566" starttime="20170606 01:48:40.410"></status>
+</kw>
+<status status="PASS" endtime="20170606 01:48:40.567" starttime="20170606 01:48:40.408"></status>
+</kw>
+<kw name="Run Script aim_main to parser Message" library="keyword">
+<kw name="Start Command" library="SSHLibrary">
+<doc>Starts execution of the `command` on the remote machine and returns immediately.</doc>
+<arguments>
+<arg>cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php</arg>
+</arguments>
+<msg timestamp="20170606 01:48:40.571" level="INFO">Starting command 'cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php'.</msg>
+<status status="PASS" endtime="20170606 01:48:40.681" starttime="20170606 01:48:40.571"></status>
+</kw>
+<kw name="Read Command Output" library="SSHLibrary">
+<doc>Returns outputs of the most recent started command.</doc>
+<assign>
+<var>${parsermsg}</var>
+</assign>
+<msg timestamp="20170606 01:48:40.686" level="INFO">Reading output of command 'cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php'.</msg>
+<msg timestamp="20170606 01:49:09.143" level="INFO">Command exited with return code 0.</msg>
+<msg timestamp="20170606 01:49:09.148" level="INFO">${parsermsg} = 
+FFM_DataTest.txt&lt;br&gt;&lt;pre&gt;Array
+(
+    [Message_Header] =&gt; Array
+        (
+            [Value] =&gt; FFM
+        )
+
+    [Message_Version] =&gt; Array
+        (
+            [Value] =&gt; 8
+        )
+
+    [Delay]...</msg>
+<status status="PASS" endtime="20170606 01:49:09.148" starttime="20170606 01:48:40.683"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${parsermsg}</arg>
+</arguments>
+<status status="PASS" endtime="20170606 01:49:09.190" starttime="20170606 01:49:09.149"></status>
+</kw>
+<status status="PASS" endtime="20170606 01:49:09.191" starttime="20170606 01:48:40.569"></status>
+</kw>
+<kw name="Check File should delete in Input path" library="keyword">
+<arguments>
+<arg>${fileName}</arg>
+</arguments>
+<kw name="File Should Not Exist" library="SSHLibrary">
+<doc>Fails if the given `path` points to an existing file.</doc>
+<arguments>
+<arg>/var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt</arg>
+</arguments>
+<status status="PASS" endtime="20170606 01:49:09.256" starttime="20170606 01:49:09.191"></status>
+</kw>
+<status status="PASS" endtime="20170606 01:49:09.256" starttime="20170606 01:49:09.191"></status>
+</kw>
+<kw name="Check File should transfer in backup folder" library="keyword">
+<arguments>
+<arg>${fileName}</arg>
+</arguments>
+<kw name="Get Current Date" library="DateTime">
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<assign>
+<var>${CurrentDate}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.258" level="INFO">${CurrentDate} = 2017-06-06 01:49:09.258</msg>
+<status status="PASS" endtime="20170606 01:49:09.258" starttime="20170606 01:49:09.258"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${CurrentDate}</arg>
+<arg>0</arg>
+<arg>4</arg>
+</arguments>
+<assign>
+<var>${Year}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.259" level="INFO">${Year} = 2017</msg>
+<status status="PASS" endtime="20170606 01:49:09.259" starttime="20170606 01:49:09.258"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${CurrentDate}</arg>
+<arg>5</arg>
+<arg>7</arg>
+</arguments>
+<assign>
+<var>${Month}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.260" level="INFO">${Month} = 06</msg>
+<status status="PASS" endtime="20170606 01:49:09.260" starttime="20170606 01:49:09.259"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${CurrentDate}</arg>
+<arg>8</arg>
+<arg>10</arg>
+</arguments>
+<assign>
+<var>${Date}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.261" level="INFO">${Date} = 06</msg>
+<status status="PASS" endtime="20170606 01:49:09.261" starttime="20170606 01:49:09.260"></status>
+</kw>
+<kw name="File Should Exist" library="SSHLibrary">
+<doc>Fails if the given `path` does NOT point to an existing file.</doc>
+<arguments>
+<arg>/var/www/html/manifest/AIM_Files/Input_TG/backup/${Year}_${Month}_${Date}/${fileName}.txt</arg>
+</arguments>
+<status status="PASS" endtime="20170606 01:49:09.296" starttime="20170606 01:49:09.261"></status>
+</kw>
+<status status="PASS" endtime="20170606 01:49:09.297" starttime="20170606 01:49:09.257"></status>
+</kw>
+<kw name="Check database Flight should insert and status is Send">
+<arguments>
+<arg>22</arg>
+<arg>${FlightNo}</arg>
+<arg>${FlightDate}</arg>
+</arguments>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${FlightNo}</arg>
+<arg>${SPACE}</arg>
+</arguments>
+<assign>
+<var>${FlightNoToQuery}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.303" level="INFO">${FlightNoToQuery} = TG600</msg>
+<status status="PASS" endtime="20170606 01:49:09.303" starttime="20170606 01:49:09.302"></status>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<doc>Converts between supported `date formats`.</doc>
+<arguments>
+<arg>${FlightDate}</arg>
+<arg>date_format=%d%b</arg>
+</arguments>
+<assign>
+<var>${ConvFlightDate}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.315" level="INFO">${ConvFlightDate} = 1900-06-05 00:00:00.000</msg>
+<status status="PASS" endtime="20170606 01:49:09.316" starttime="20170606 01:49:09.304"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${ConvFlightDate}</arg>
+<arg>0</arg>
+<arg>10</arg>
+</arguments>
+<assign>
+<var>${FlightDateResult}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.318" level="INFO">${FlightDateResult} = 1900-06-05</msg>
+<status status="PASS" endtime="20170606 01:49:09.319" starttime="20170606 01:49:09.316"></status>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<assign>
+<var>${CurrentDate}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.320" level="INFO">${CurrentDate} = 2017-06-06 01:49:09.320</msg>
+<status status="PASS" endtime="20170606 01:49:09.320" starttime="20170606 01:49:09.319"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${CurrentDate}</arg>
+<arg>0</arg>
+<arg>4</arg>
+</arguments>
+<assign>
+<var>${FlightDateReplaceYear}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.321" level="INFO">${FlightDateReplaceYear} = 2017</msg>
+<status status="PASS" endtime="20170606 01:49:09.321" starttime="20170606 01:49:09.320"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${FlightDateResult}</arg>
+<arg>1900</arg>
+<arg>${FlightDateReplaceYear}</arg>
+</arguments>
+<assign>
+<var>${FlightDateToQuery}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.323" level="INFO">${FlightDateToQuery} = 2017-06-05</msg>
+<status status="PASS" endtime="20170606 01:49:09.324" starttime="20170606 01:49:09.322"></status>
+</kw>
+<kw name="Query" library="DatabaseLibrary">
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional</doc>
+<arguments>
+<arg>SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' and vsedhead.VH_DocumentType = '${Indicator}'</arg>
+</arguments>
+<assign>
+<var>${FlightData}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.325" level="INFO">Executing : Query  |  SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG600' AND vseddetail.VD_FlightDate = '2017-06-05' and vsedhead.VH_DocumentType = '22' </msg>
+<msg timestamp="20170606 01:49:09.413" level="INFO">${FlightData} = (('Sent',),)</msg>
+<status status="PASS" endtime="20170606 01:49:09.413" starttime="20170606 01:49:09.324"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${FlightData[0][0]}</arg>
+<arg>Sent</arg>
+</arguments>
+<msg timestamp="20170606 01:49:09.415" level="INFO">Argument types are:
+&lt;type 'str'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" endtime="20170606 01:49:09.416" starttime="20170606 01:49:09.414"></status>
+</kw>
+<status status="PASS" endtime="20170606 01:49:09.416" starttime="20170606 01:49:09.299"></status>
+</kw>
+<kw name="Output folder should visible XML File">
+<arguments>
+<arg>22</arg>
+<arg>${FlightNo}</arg>
+<arg>${FlightDate}</arg>
+</arguments>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${FlightNo}</arg>
+<arg>${SPACE}</arg>
+</arguments>
+<assign>
+<var>${FlightNoToQuery}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.421" level="INFO">${FlightNoToQuery} = TG600</msg>
+<status status="PASS" endtime="20170606 01:49:09.421" starttime="20170606 01:49:09.420"></status>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<doc>Converts between supported `date formats`.</doc>
+<arguments>
+<arg>${FlightDate}</arg>
+<arg>date_format=%d%b</arg>
+</arguments>
+<assign>
+<var>${ConvFlightDate}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.423" level="INFO">${ConvFlightDate} = 1900-06-05 00:00:00.000</msg>
+<status status="PASS" endtime="20170606 01:49:09.423" starttime="20170606 01:49:09.421"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${ConvFlightDate}</arg>
+<arg>0</arg>
+<arg>10</arg>
+</arguments>
+<assign>
+<var>${FlightDateResult}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.426" level="INFO">${FlightDateResult} = 1900-06-05</msg>
+<status status="PASS" endtime="20170606 01:49:09.426" starttime="20170606 01:49:09.424"></status>
+</kw>
+<kw name="Get Current Date" library="DateTime">
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<assign>
+<var>${CurrentDate}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.428" level="INFO">${CurrentDate} = 2017-06-06 01:49:09.427</msg>
+<status status="PASS" endtime="20170606 01:49:09.428" starttime="20170606 01:49:09.427"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${CurrentDate}</arg>
+<arg>0</arg>
+<arg>4</arg>
+</arguments>
+<assign>
+<var>${FlightDateReplaceYear}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.430" level="INFO">${FlightDateReplaceYear} = 2017</msg>
+<status status="PASS" endtime="20170606 01:49:09.430" starttime="20170606 01:49:09.429"></status>
+</kw>
+<kw name="Replace String" library="String">
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<arguments>
+<arg>${FlightDateResult}</arg>
+<arg>1900</arg>
+<arg>${FlightDateReplaceYear}</arg>
+</arguments>
+<assign>
+<var>${FlightDateToQuery}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.432" level="INFO">${FlightDateToQuery} = 2017-06-05</msg>
+<status status="PASS" endtime="20170606 01:49:09.432" starttime="20170606 01:49:09.431"></status>
+</kw>
+<kw name="Query" library="DatabaseLibrary">
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional</doc>
+<arguments>
+<arg>SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' and vsedhead.VH_DocumentType = '${Indicator}'</arg>
+</arguments>
+<assign>
+<var>${DocumentNo}</var>
+</assign>
+<msg timestamp="20170606 01:49:09.434" level="INFO">Executing : Query  |  SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG600' AND vseddetail.VD_FlightDate = '2017-06-05' and vsedhead.VH_DocumentType = '22' </msg>
+<msg timestamp="20170606 01:49:09.519" level="INFO">${DocumentNo} = (('ACYNVV000I2XG',),)</msg>
+<status status="PASS" endtime="20170606 01:49:09.519" starttime="20170606 01:49:09.433"></status>
+</kw>
+<kw name="File Should Exist" library="SSHLibrary">
+<doc>Fails if the given `path` does NOT point to an existing file.</doc>
+<arguments>
+<arg>/var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_${DocumentNo[0][0]}.xml</arg>
+</arguments>
+<status status="PASS" endtime="20170606 01:49:09.556" starttime="20170606 01:49:09.520"></status>
+</kw>
+<status status="PASS" endtime="20170606 01:49:09.557" starttime="20170606 01:49:09.418"></status>
+</kw>
+<kw type="teardown" name="Disconnect From Database" library="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<msg timestamp="20170606 01:49:09.559" level="INFO">Executing : Disconnect From Database</msg>
+<status status="PASS" endtime="20170606 01:49:09.560" starttime="20170606 01:49:09.559"></status>
+</kw>
+<status status="PASS" endtime="20170606 01:49:09.561" critical="yes" starttime="20170606 01:48:40.405"></status>
+</test>
+<kw type="teardown" name="Close All Connections" library="SSHLibrary">
+<doc>Closes all open connections.</doc>
+<status status="PASS" endtime="20170606 01:49:09.684" starttime="20170606 01:49:09.566"></status>
+</kw>
+<status status="PASS" endtime="20170606 01:49:09.684" starttime="20170606 01:48:36.851"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="0" pass="2">Critical Tests</stat>
+<stat fail="0" pass="2">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="0" id="s1" name="VSEDFFM" pass="2">VSEDFFM</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
