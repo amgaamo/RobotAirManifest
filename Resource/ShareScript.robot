@@ -52,5 +52,3 @@ Run script distributeCusres
     SSHLibrary.Start Command    cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php
     ${UpdateResponse}=    Read Command Output
     Log to console    ${UpdateResponse}
-
-    /var/www/html/manifest/AIM_Files/Input_Cusres/TG

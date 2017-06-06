@@ -1,7 +1,7 @@
 *** Setting ***
 Library     SSHLibrary
 Library     String
-Resource    Resource/keyword.robot
+Resource    Resource/ShareScript.robot
 
 Suite Setup             Open Connection And Log In
 Suite Teardown          Close All Connections

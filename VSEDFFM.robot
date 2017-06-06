@@ -1,7 +1,7 @@
 *** Setting ***
 Library     SSHLibrary
 Library     String
-Resource    Resource/keyword.robot
+Resource    Resource/ShareScript.robot
 
 Suite Setup            Open Connection And Log In
 Suite Teardown         Close All Connections
@@ -40,10 +40,10 @@ Sign XML File and Send to gateway
       Run Script sign XML to send gateway
       Output folder should not visible XML files                  22        ${FlightNo}       ${FlightDate}
 
-# Receive Response from gateway and update status
-#      Run script distributeCusres
-#      Check response from gateway in folder Input cusres TG should visible
-#      Check Database Flight should status Accepted
+Receive Response from gateway and update status
+     Run script distributeCusres
+     Check response from gateway in folder Input cusres TG should visible
+     Check Database Flight should status Accepted
 
 
 *** Keywords ***
