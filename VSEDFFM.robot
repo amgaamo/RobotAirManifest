@@ -36,9 +36,9 @@ Parser Message FFM and Generate XML to Output folder
       Check database Flight should insert and status is Send      22        ${FlightNo}       ${FlightDate}
       Output folder should visible XML File                       22        ${FlightNo}       ${FlightDate}
 
-# Sign XML File and Send to gateway
-#       Run Script sign XML to send gateway
-#       Output folder should not visible XML files
+Sign XML File and Send to gateway
+      Run Script sign XML to send gateway
+      Output folder should not visible XML files                  22        ${FlightNo}       ${FlightDate}
 
 # Receive Response from gateway and update status
 #      Run script distributeCusres
@@ -95,3 +95,18 @@ Output folder should visible XML File
         ${DocumentNo}    Query    SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' and vsedhead.VH_DocumentType = '${Indicator}'
 
         SSHLibrary.File Should Exist    /var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_${DocumentNo[0][0]}.xml
+
+
+Output folder should not visible XML files
+    [Arguments]       ${Indicator}      ${FlightNo}     ${FlightDate}
+        ${FlightNoToQuery}      Remove String           ${FlightNo}         ${SPACE}
+        
+        ${ConvFlightDate}               Convert Date                ${FlightDate}           date_format=%d%b
+        ${FlightDateResult}             String.Get Substring        ${ConvFlightDate}       0     10
+        ${CurrentDate}                  Get Current Date
+        ${FlightDateReplaceYear}        String.Get Substring        ${CurrentDate}          0       4
+        ${FlightDateToQuery}            String.Replace String       ${FlightDateResult}     1900        ${FlightDateReplaceYear}
+    
+        ${DocumentNo}    Query    SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' and vsedhead.VH_DocumentType = '${Indicator}'
+
+        SSHLibrary.File Should Not Exist    /var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_${DocumentNo[0][0]}.xml

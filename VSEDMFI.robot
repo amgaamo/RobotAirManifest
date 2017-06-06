@@ -36,9 +36,9 @@ Parser Message MFI and Generate XML to Output folder
       Check database Flight should insert and status is Send      23        ${FlightNo}          ${FlightDate}
       Output folder should visible XML File                       23        ${FlightNo}          ${FlightDate}
 
-# Sign XML File and Send to gateway
-#       Run Script sign XML to send gateway
-#       Output folder should not visible XML files
+Sign XML File and Send to gateway
+      Run Script sign XML to send gateway
+      Output folder should not visible XML files                  23        ${FlightNo}          ${FlightDate}
 
 # Receive Response from gateway and update status
 #      Run script distributeCusres
@@ -82,3 +82,14 @@ Output folder should visible XML File
         ${DocumentNo}    Query    SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' AND vsedhead.VH_DocumentType = '${Indicator}'
 
         SSHLibrary.File Should Exist    /var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_${DocumentNo[0][0]}.xml
+
+
+Output folder should not visible XML files
+    [Arguments]       ${Indicator}      ${FlightNo}     ${FlightDate}
+        ${FlightNoToQuery}      Remove String           ${FlightNo}         ${SPACE}
+        ${ConvFlightDate}       Convert Date            ${FlightDate}       date_format=%d%m%Y
+        ${FlightDateToQuery}    String.Get Substring    ${ConvFlightDate}       0     10
+    
+        ${DocumentNo}    Query    SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' AND vsedhead.VH_DocumentType = '${Indicator}'
+
+        SSHLibrary.File Should Not Exist    /var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_${DocumentNo[0][0]}.xml
