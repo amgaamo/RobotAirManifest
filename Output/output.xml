@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generated="20170606 01:48:36.848" generator="Robot 3.0.2 (Python 2.7.13 on win32)">
-<suite source="D:\AutomateTest\RobotFramework\AirManifest\VSEDFFM.robot" id="s1" name="VSEDFFM">
+<robot generated="20170607 00:02:07.815" generator="Robot 3.0.2 (Python 2.7.13 on win32)">
+<suite source="D:\AutomateTest\RobotFramework\AirManifest\VSEDMFI.robot" id="s1" name="VSEDMFI">
 <kw type="setup" name="Open Connection And Log In">
+<msg timestamp="20170607 00:02:08.549" level="TRACE">Arguments: [  ]</msg>
 <kw name="Open Connection" library="SSHLibrary">
 <doc>Opens a new SSH connection to the given `host` and `port`.</doc>
 <arguments>
 <arg>${Host}</arg>
 <arg>port=22</arg>
 </arguments>
-<status status="PASS" endtime="20170606 01:48:36.983" starttime="20170606 01:48:36.983"></status>
+<msg timestamp="20170607 00:02:08.550" level="TRACE">Arguments: [ '10.2.3.72' | port='22' ]</msg>
+<msg timestamp="20170607 00:02:08.550" level="TRACE">Return: 1</msg>
+<status status="PASS" endtime="20170607 00:02:08.551" starttime="20170607 00:02:08.550"></status>
 </kw>
 <kw name="Login" library="SSHLibrary">
 <doc>Logs into the SSH server with the given `username` and `password`.</doc>
@@ -17,15 +20,21 @@
 <arg>${Password}</arg>
 <arg>delay=0.5</arg>
 </arguments>
-<msg timestamp="20170606 01:48:36.984" level="INFO">Logging into '10.2.3.72:22' as 'root'.</msg>
-<msg timestamp="20170606 01:48:38.795" level="INFO">Read output: Last login: Tue Jun  6 01:48:13 2017 from 10.0.66.118
+<msg timestamp="20170607 00:02:08.551" level="TRACE">Arguments: [ 'root' | 'netbay@123' | delay='0.5' ]</msg>
+<msg timestamp="20170607 00:02:08.551" level="INFO">Logging into '10.2.3.72:22' as 'root'.</msg>
+<msg timestamp="20170607 00:02:09.271" level="DEBUG">Adding ssh-rsa host key for 10.2.3.72: dfa0d2f8beb1fc5e69bc9c60d93b60d4</msg>
+<msg timestamp="20170607 00:02:09.445" level="DEBUG">[chan 0] Max packet in: 32768 bytes</msg>
+<msg timestamp="20170607 00:02:10.499" level="INFO">Read output: Last login: Tue Jun  6 23:43:03 2017 from 10.0.66.126
 [root@swebmf_uat ~]#</msg>
-<status status="PASS" endtime="20170606 01:48:38.796" starttime="20170606 01:48:36.983"></status>
+<msg timestamp="20170607 00:02:10.499" level="TRACE">Return: 'Last login: Tue Jun  6 23:43:03 2017 from 10.0.66.126\r\r\n[root@swebmf_uat ~]# '</msg>
+<status status="PASS" endtime="20170607 00:02:10.499" starttime="20170607 00:02:08.551"></status>
 </kw>
-<status status="PASS" endtime="20170606 01:48:38.797" starttime="20170606 01:48:36.982"></status>
+<msg timestamp="20170607 00:02:10.499" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:10.499" starttime="20170607 00:02:08.549"></status>
 </kw>
-<test id="s1-t1" name="Put Message FFM From Local to Server">
-<kw type="setup" name="Connect To Database AirManifest" library="keyword">
+<test id="s1-t1" name="Put Message MFI From Local to Server">
+<kw type="setup" name="Connect To Database AirManifest" library="ShareScript">
+<msg timestamp="20170607 00:02:10.501" level="TRACE">Arguments: [  ]</msg>
 <kw name="Connect To Database" library="DatabaseLibrary">
 <doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to</doc>
 <arguments>
@@ -36,16 +45,20 @@
 <arg>10.1.3.72</arg>
 <arg>3306</arg>
 </arguments>
-<msg timestamp="20170606 01:48:38.853" level="INFO">Connecting using : pymysql.connect(db=manifest_air_test, user=pattaraporn, passwd=pattaraporn@netbay, host=10.1.3.72, port=3306, charset=None) </msg>
-<status status="PASS" endtime="20170606 01:48:39.047" starttime="20170606 01:48:38.804"></status>
+<msg timestamp="20170607 00:02:10.501" level="TRACE">Arguments: [ 'pymysql' | 'manifest_air_test' | 'pattaraporn' | 'pattaraporn@netbay' | '10.1.3.72' | '3306' ]</msg>
+<msg timestamp="20170607 00:02:10.576" level="INFO">Connecting using : pymysql.connect(db=manifest_air_test, user=pattaraporn, passwd=pattaraporn@netbay, host=10.1.3.72, port=3306, charset=None) </msg>
+<msg timestamp="20170607 00:02:10.632" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:10.632" starttime="20170607 00:02:10.501"></status>
 </kw>
-<status status="PASS" endtime="20170606 01:48:39.048" starttime="20170606 01:48:38.803"></status>
+<msg timestamp="20170607 00:02:10.632" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:10.632" starttime="20170607 00:02:10.501"></status>
 </kw>
-<kw name="Put File From Local to Server" library="keyword">
+<kw name="Put File From Local to Server" library="ShareScript">
 <arguments>
 <arg>${Indicator}</arg>
 <arg>${fileName}</arg>
 </arguments>
+<msg timestamp="20170607 00:02:10.633" level="TRACE">Arguments: [ ${Indicator}='IMPORT' | ${fileName}='MFI_DataTest' ]</msg>
 <kw name="Put File" library="SSHLibrary">
 <doc>Uploads file(s) from the local machine to the remote machine.</doc>
 <arguments>
@@ -53,24 +66,46 @@
 <arg>destination=/var/www/html/manifest/AIM_Files/Input_TG</arg>
 <arg>mode=0744</arg>
 </arguments>
-<msg timestamp="20170606 01:48:39.210" level="INFO">[chan 1] Opened sftp connection (server version 3)</msg>
-<msg timestamp="20170606 01:48:39.738" level="INFO">'D:\AutomateTest\RobotFramework\AirManifest\Resource\DataTestMSG\EXPORT\FFM_DataTest.txt' -&gt; '/var/www/html/manifest/AIM_Files/Input_TG/FFM_DataTest.txt'</msg>
-<status status="PASS" endtime="20170606 01:48:39.738" starttime="20170606 01:48:39.055"></status>
+<msg timestamp="20170607 00:02:10.634" level="TRACE">Arguments: [ 'D:\\AutomateTest\\RobotFramework\\AirManifest\\Resource\\DataTestMSG\\IMPORT\\MFI_DataTest.txt' | destination='/var/www/html/manifest/AIM_Files/Input_TG' | mode='0744' ]</msg>
+<msg timestamp="20170607 00:02:10.635" level="DEBUG">[chan 1] Max packet in: 32768 bytes</msg>
+<msg timestamp="20170607 00:02:10.698" level="INFO">[chan 1] Opened sftp connection (server version 3)</msg>
+<msg timestamp="20170607 00:02:10.698" level="DEBUG">[chan 1] normalize('.')</msg>
+<msg timestamp="20170607 00:02:10.713" level="DEBUG">[chan 1] stat('/var/www/html/manifest/AIM_Files/Input_TG')</msg>
+<msg timestamp="20170607 00:02:10.729" level="DEBUG">[chan 1] stat('/')</msg>
+<msg timestamp="20170607 00:02:10.746" level="DEBUG">[chan 1] stat('/var')</msg>
+<msg timestamp="20170607 00:02:10.760" level="DEBUG">[chan 1] stat('/var/www')</msg>
+<msg timestamp="20170607 00:02:10.771" level="DEBUG">[chan 1] stat('/var/www/html')</msg>
+<msg timestamp="20170607 00:02:10.783" level="DEBUG">[chan 1] stat('/var/www/html/manifest')</msg>
+<msg timestamp="20170607 00:02:10.796" level="DEBUG">[chan 1] stat('/var/www/html/manifest/AIM_Files')</msg>
+<msg timestamp="20170607 00:02:10.809" level="DEBUG">[chan 1] stat('/var/www/html/manifest/AIM_Files/Input_TG')</msg>
+<msg timestamp="20170607 00:02:10.822" level="DEBUG">[chan 1] open('/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt', 'wb')</msg>
+<msg timestamp="20170607 00:02:10.833" level="DEBUG">[chan 1] open('/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt', 'wb') -&gt; 00000000</msg>
+<msg timestamp="20170607 00:02:10.834" level="DEBUG">[chan 1] chmod('/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt', 484)</msg>
+<msg timestamp="20170607 00:02:10.849" level="DEBUG">[chan 1] close(00000000)</msg>
+<msg timestamp="20170607 00:02:10.877" level="INFO">'D:\AutomateTest\RobotFramework\AirManifest\Resource\DataTestMSG\IMPORT\MFI_DataTest.txt' -&gt; '/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt'</msg>
+<msg timestamp="20170607 00:02:10.878" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:10.878" starttime="20170607 00:02:10.634"></status>
 </kw>
-<status status="PASS" endtime="20170606 01:48:39.738" starttime="20170606 01:48:39.050"></status>
+<msg timestamp="20170607 00:02:10.878" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:10.878" starttime="20170607 00:02:10.633"></status>
 </kw>
-<kw name="Check File in Server should visible" library="keyword">
+<kw name="Check File in Server should visible" library="ShareScript">
 <arguments>
 <arg>${fileName}</arg>
 </arguments>
+<msg timestamp="20170607 00:02:10.879" level="TRACE">Arguments: [ ${fileName}='MFI_DataTest' ]</msg>
 <kw name="File Should Exist" library="SSHLibrary">
 <doc>Fails if the given `path` does NOT point to an existing file.</doc>
 <arguments>
 <arg>/var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt</arg>
 </arguments>
-<status status="PASS" endtime="20170606 01:48:39.775" starttime="20170606 01:48:39.740"></status>
+<msg timestamp="20170607 00:02:10.880" level="TRACE">Arguments: [ '/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt' ]</msg>
+<msg timestamp="20170607 00:02:10.880" level="DEBUG">[chan 1] stat('/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt')</msg>
+<msg timestamp="20170607 00:02:10.893" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:10.894" starttime="20170607 00:02:10.880"></status>
 </kw>
-<status status="PASS" endtime="20170606 01:48:39.775" starttime="20170606 01:48:39.739"></status>
+<msg timestamp="20170607 00:02:10.894" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:10.894" starttime="20170607 00:02:10.879"></status>
 </kw>
 <kw name="Prepare message to test">
 <arguments>
@@ -78,134 +113,102 @@
 <arg>${FlightNo}</arg>
 <arg>${FlightDate}</arg>
 </arguments>
+<msg timestamp="20170607 00:02:10.896" level="TRACE">Arguments: [ ${fileName}='MFI_DataTest' | ${flight}='TG 625' | ${FlightDate}='07062017' ]</msg>
 <kw name="Start Command" library="SSHLibrary">
 <doc>Starts execution of the `command` on the remote machine and returns immediately.</doc>
 <arguments>
 <arg>cat /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt</arg>
 </arguments>
-<msg timestamp="20170606 01:48:39.777" level="INFO">Starting command 'cat /var/www/html/manifest/AIM_Files/Input_TG/FFM_DataTest.txt'.</msg>
-<status status="PASS" endtime="20170606 01:48:39.892" starttime="20170606 01:48:39.777"></status>
+<msg timestamp="20170607 00:02:10.896" level="TRACE">Arguments: [ 'cat /var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt' ]</msg>
+<msg timestamp="20170607 00:02:10.896" level="INFO">Starting command 'cat /var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt'.</msg>
+<msg timestamp="20170607 00:02:10.897" level="DEBUG">[chan 2] Max packet in: 32768 bytes</msg>
+<msg timestamp="20170607 00:02:10.930" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:10.930" starttime="20170607 00:02:10.896"></status>
 </kw>
 <kw name="Read Command Output" library="SSHLibrary">
 <doc>Returns outputs of the most recent started command.</doc>
 <assign>
 <var>${GetContentVSED}</var>
 </assign>
-<msg timestamp="20170606 01:48:39.895" level="INFO">Reading output of command 'cat /var/www/html/manifest/AIM_Files/Input_TG/FFM_DataTest.txt'.</msg>
-<msg timestamp="20170606 01:48:39.905" level="INFO">Command exited with return code 0.</msg>
-<msg timestamp="20170606 01:48:39.907" level="INFO">${GetContentVSED} = FFM/8
-1/TG0600/29MAY0040/BKK/HSTNF/CH/29MAY2040/ZRH
-ZRH/04JUN0725
-ULD/AAF47038TG
-217-02950135BKKZRH/T38K298.0MC3.00/VEGETABLE
-/PER
-217-02950124BKKZRH/T93K516.0MC4.00/VEGETABLE
-/PER
-217-0295014...</msg>
-<status status="PASS" endtime="20170606 01:48:39.907" starttime="20170606 01:48:39.894"></status>
-</kw>
-<kw name="Get Line" library="String">
-<doc>Returns the specified line from the given ``string``.</doc>
-<arguments>
-<arg>${GetContentVSED}</arg>
-<arg>1</arg>
-</arguments>
-<assign>
-<var>${GetLineContent}</var>
-</assign>
-<msg timestamp="20170606 01:48:39.910" level="INFO">${GetLineContent} = 1/TG0600/29MAY0040/BKK/HSTNF/CH/29MAY2040/ZRH</msg>
-<status status="PASS" endtime="20170606 01:48:39.910" starttime="20170606 01:48:39.908"></status>
+<msg timestamp="20170607 00:02:10.931" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20170607 00:02:10.931" level="INFO">Reading output of command 'cat /var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt'.</msg>
+<msg timestamp="20170607 00:02:10.941" level="INFO">Command exited with return code 0.</msg>
+<msg timestamp="20170607 00:02:10.941" level="TRACE">Return: 'MFITG 624 29052017051011909\r\n218023570020003PK000000000037.00KGMHKHKGBKK23SHIP SPARES 2\r\n218022373030003PK000000000002.00KGMHKHKGBKK23CONSOL 3   \r\n;'</msg>
+<msg timestamp="20170607 00:02:10.941" level="INFO">${GetContentVSED} = MFITG 624 29052017051011909
+218023570020003PK000000000037.00KGMHKHKGBKK23SHIP SPARES 2
+218022373030003PK000000000002.00KGMHKHKGBKK23CONSOL 3   
+;</msg>
+<status status="PASS" endtime="20170607 00:02:10.941" starttime="20170607 00:02:10.931"></status>
 </kw>
 <kw name="Get Substring" library="String">
 <doc>Returns a substring from ``start`` index to ``end`` index.</doc>
 <arguments>
-<arg>${GetLineContent}</arg>
-<arg>2</arg>
-<arg>8</arg>
+<arg>${GetContentVSED}</arg>
+<arg>3</arg>
+<arg>9</arg>
 </arguments>
 <assign>
 <var>${Old_flightNo}</var>
 </assign>
-<msg timestamp="20170606 01:48:39.913" level="INFO">${Old_flightNo} = TG0600</msg>
-<status status="PASS" endtime="20170606 01:48:39.914" starttime="20170606 01:48:39.911"></status>
+<msg timestamp="20170607 00:02:10.942" level="TRACE">Arguments: [ 'MFITG 624 29052017051011909\r\n218023570020003PK000000000037.00KGMHKHKGBKK23SHIP SPARES 2\r\n218022373030003PK000000000002.00KGMHKHKGBKK23CONSOL 3   \r\n;' | '3' | '9' ]</msg>
+<msg timestamp="20170607 00:02:10.942" level="TRACE">Return: 'TG 624'</msg>
+<msg timestamp="20170607 00:02:10.942" level="INFO">${Old_flightNo} = TG 624</msg>
+<status status="PASS" endtime="20170607 00:02:10.942" starttime="20170607 00:02:10.941"></status>
 </kw>
 <kw name="Get Substring" library="String">
 <doc>Returns a substring from ``start`` index to ``end`` index.</doc>
 <arguments>
-<arg>${GetLineContent}</arg>
-<arg>9</arg>
-<arg>14</arg>
+<arg>${GetContentVSED}</arg>
+<arg>10</arg>
+<arg>18</arg>
 </arguments>
 <assign>
 <var>${Old_flightDate}</var>
 </assign>
-<msg timestamp="20170606 01:48:39.916" level="INFO">${Old_flightDate} = 29MAY</msg>
-<status status="PASS" endtime="20170606 01:48:39.916" starttime="20170606 01:48:39.915"></status>
-</kw>
-<kw name="Get Substring" library="String">
-<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
-<arguments>
-<arg>${GetLineContent}</arg>
-<arg>32</arg>
-<arg>37</arg>
-</arguments>
-<assign>
-<var>${Old_flightDate2}</var>
-</assign>
-<msg timestamp="20170606 01:48:39.918" level="INFO">${Old_flightDate2} = 29MAY</msg>
-<status status="PASS" endtime="20170606 01:48:39.918" starttime="20170606 01:48:39.917"></status>
-</kw>
-<kw name="Replace String" library="String">
-<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
-<arguments>
-<arg>${flight}</arg>
-<arg>${SPACE}</arg>
-<arg>0</arg>
-</arguments>
-<assign>
-<var>${New_flightNo}</var>
-</assign>
-<msg timestamp="20170606 01:48:39.920" level="INFO">${New_flightNo} = TG0600</msg>
-<status status="PASS" endtime="20170606 01:48:39.921" starttime="20170606 01:48:39.919"></status>
+<msg timestamp="20170607 00:02:10.942" level="TRACE">Arguments: [ 'MFITG 624 29052017051011909\r\n218023570020003PK000000000037.00KGMHKHKGBKK23SHIP SPARES 2\r\n218022373030003PK000000000002.00KGMHKHKGBKK23CONSOL 3   \r\n;' | '10' | '18' ]</msg>
+<msg timestamp="20170607 00:02:10.942" level="TRACE">Return: '29052017'</msg>
+<msg timestamp="20170607 00:02:10.943" level="INFO">${Old_flightDate} = 29052017</msg>
+<status status="PASS" endtime="20170607 00:02:10.943" starttime="20170607 00:02:10.942"></status>
 </kw>
 <kw name="Execute Command" library="SSHLibrary">
 <doc>Executes `command` on the remote machine and returns its outputs.</doc>
 <arguments>
-<arg>replace "${Old_flightNo}" "${New_flightNo}" -- /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt</arg>
+<arg>replace "${Old_flightNo}" "${flight}" -- /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt</arg>
 </arguments>
-<msg timestamp="20170606 01:48:39.923" level="INFO">Executing command 'replace "TG0600" "TG0600" -- /var/www/html/manifest/AIM_Files/Input_TG/FFM_DataTest.txt'.</msg>
-<msg timestamp="20170606 01:48:40.078" level="INFO">Command exited with return code 0.</msg>
-<status status="PASS" endtime="20170606 01:48:40.079" starttime="20170606 01:48:39.922"></status>
+<msg timestamp="20170607 00:02:10.943" level="TRACE">Arguments: [ 'replace "TG 624" "TG 625" -- /var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt' ]</msg>
+<msg timestamp="20170607 00:02:10.943" level="INFO">Executing command 'replace "TG 624" "TG 625" -- /var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt'.</msg>
+<msg timestamp="20170607 00:02:10.944" level="DEBUG">[chan 3] Max packet in: 32768 bytes</msg>
+<msg timestamp="20170607 00:02:11.040" level="INFO">Command exited with return code 0.</msg>
+<msg timestamp="20170607 00:02:11.040" level="TRACE">Return: '/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt converted'</msg>
+<status status="PASS" endtime="20170607 00:02:11.040" starttime="20170607 00:02:10.943"></status>
 </kw>
 <kw name="Execute Command" library="SSHLibrary">
 <doc>Executes `command` on the remote machine and returns its outputs.</doc>
 <arguments>
 <arg>replace "${Old_flightDate}" "${FlightDate}" -- /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt</arg>
 </arguments>
-<msg timestamp="20170606 01:48:40.082" level="INFO">Executing command 'replace "29MAY" "05JUN" -- /var/www/html/manifest/AIM_Files/Input_TG/FFM_DataTest.txt'.</msg>
-<msg timestamp="20170606 01:48:40.232" level="INFO">Command exited with return code 0.</msg>
-<status status="PASS" endtime="20170606 01:48:40.233" starttime="20170606 01:48:40.080"></status>
+<msg timestamp="20170607 00:02:11.041" level="TRACE">Arguments: [ 'replace "29052017" "07062017" -- /var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt' ]</msg>
+<msg timestamp="20170607 00:02:11.041" level="INFO">Executing command 'replace "29052017" "07062017" -- /var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt'.</msg>
+<msg timestamp="20170607 00:02:11.042" level="DEBUG">[chan 4] Max packet in: 32768 bytes</msg>
+<msg timestamp="20170607 00:02:11.132" level="INFO">Command exited with return code 0.</msg>
+<msg timestamp="20170607 00:02:11.132" level="TRACE">Return: '/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt converted'</msg>
+<status status="PASS" endtime="20170607 00:02:11.132" starttime="20170607 00:02:11.041"></status>
 </kw>
-<kw name="Execute Command" library="SSHLibrary">
-<doc>Executes `command` on the remote machine and returns its outputs.</doc>
-<arguments>
-<arg>replace "${Old_flightDate2}" "${FlightDate}" -- /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt</arg>
-</arguments>
-<msg timestamp="20170606 01:48:40.236" level="INFO">Executing command 'replace "29MAY" "05JUN" -- /var/www/html/manifest/AIM_Files/Input_TG/FFM_DataTest.txt'.</msg>
-<msg timestamp="20170606 01:48:40.388" level="INFO">Command exited with return code 0.</msg>
-<status status="PASS" endtime="20170606 01:48:40.389" starttime="20170606 01:48:40.234"></status>
-</kw>
-<status status="PASS" endtime="20170606 01:48:40.389" starttime="20170606 01:48:39.776"></status>
+<msg timestamp="20170607 00:02:11.132" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:11.132" starttime="20170607 00:02:10.895"></status>
 </kw>
 <kw type="teardown" name="Disconnect From Database" library="DatabaseLibrary">
 <doc>Disconnects from the database.</doc>
-<msg timestamp="20170606 01:48:40.394" level="INFO">Executing : Disconnect From Database</msg>
-<status status="PASS" endtime="20170606 01:48:40.395" starttime="20170606 01:48:40.393"></status>
+<msg timestamp="20170607 00:02:11.133" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20170607 00:02:11.133" level="INFO">Executing : Disconnect From Database</msg>
+<msg timestamp="20170607 00:02:11.133" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:11.133" starttime="20170607 00:02:11.133"></status>
 </kw>
-<status status="PASS" endtime="20170606 01:48:40.397" critical="yes" starttime="20170606 01:48:38.798"></status>
+<status status="PASS" endtime="20170607 00:02:11.134" critical="yes" starttime="20170607 00:02:10.499"></status>
 </test>
-<test id="s1-t2" name="Parser Message FFM and Generate XML to Output folder">
-<kw type="setup" name="Connect To Database AirManifest" library="keyword">
+<test id="s1-t2" name="Parser Message MFI and Generate XML to Output folder">
+<kw type="setup" name="Connect To Database AirManifest" library="ShareScript">
+<msg timestamp="20170607 00:02:11.138" level="TRACE">Arguments: [  ]</msg>
 <kw name="Connect To Database" library="DatabaseLibrary">
 <doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to</doc>
 <arguments>
@@ -216,76 +219,63 @@ ULD/AAF47038TG
 <arg>10.1.3.72</arg>
 <arg>3306</arg>
 </arguments>
-<msg timestamp="20170606 01:48:40.413" level="INFO">Connecting using : pymysql.connect(db=manifest_air_test, user=pattaraporn, passwd=pattaraporn@netbay, host=10.1.3.72, port=3306, charset=None) </msg>
-<status status="PASS" endtime="20170606 01:48:40.566" starttime="20170606 01:48:40.410"></status>
+<msg timestamp="20170607 00:02:11.139" level="TRACE">Arguments: [ 'pymysql' | 'manifest_air_test' | 'pattaraporn' | 'pattaraporn@netbay' | '10.1.3.72' | '3306' ]</msg>
+<msg timestamp="20170607 00:02:11.139" level="INFO">Connecting using : pymysql.connect(db=manifest_air_test, user=pattaraporn, passwd=pattaraporn@netbay, host=10.1.3.72, port=3306, charset=None) </msg>
+<msg timestamp="20170607 00:02:11.190" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:11.190" starttime="20170607 00:02:11.139"></status>
 </kw>
-<status status="PASS" endtime="20170606 01:48:40.567" starttime="20170606 01:48:40.408"></status>
+<msg timestamp="20170607 00:02:11.190" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:11.190" starttime="20170607 00:02:11.138"></status>
 </kw>
-<kw name="Run Script aim_main to parser Message" library="keyword">
-<kw name="Start Command" library="SSHLibrary">
-<doc>Starts execution of the `command` on the remote machine and returns immediately.</doc>
+<kw name="Run Script aim_main to parser Message" library="ShareScript">
+<msg timestamp="20170607 00:02:11.191" level="TRACE">Arguments: [  ]</msg>
+<kw name="Execute Command" library="SSHLibrary">
+<doc>Executes `command` on the remote machine and returns its outputs.</doc>
 <arguments>
 <arg>cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php</arg>
 </arguments>
-<msg timestamp="20170606 01:48:40.571" level="INFO">Starting command 'cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php'.</msg>
-<status status="PASS" endtime="20170606 01:48:40.681" starttime="20170606 01:48:40.571"></status>
+<msg timestamp="20170607 00:02:11.192" level="TRACE">Arguments: [ 'cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php' ]</msg>
+<msg timestamp="20170607 00:02:11.192" level="INFO">Executing command 'cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php'.</msg>
+<msg timestamp="20170607 00:02:11.192" level="DEBUG">[chan 5] Max packet in: 32768 bytes</msg>
+<msg timestamp="20170607 00:02:38.513" level="INFO">Command exited with return code 0.</msg>
+<msg timestamp="20170607 00:02:38.513" level="TRACE">Return: "\nMFI_DataTest.txt&lt;br&gt;&lt;pre&gt;Array\n(\n    [Message_Header] =&gt; Array\n        (\n            [Length] =&gt; 3\n            [DataType] =&gt; a\n            [Value] =&gt; MFI\n        )\n\n    [Carrier_Code] =&gt; Array\n        (\n            [Length] =&gt; 3\n            [DataType] =&gt; a\n            [Value] =&gt; TG\n        )\n\n    [Flight_Number] =&gt; Array\n        (\n            [Length] =&gt; 4\n            [DataType] =&gt; a\n            [Value] =&gt; 625\n        )\n\n    [Arrival_date] =&gt; Array\n        (\n            [Length] =&gt; 8\n            [DataType] =&gt; a\n            [Value] =&gt; 07062017\n        )\n\n    [ArrivalTime] =&gt; Array\n        (\n            [Length] =&gt; 4\n            [DataType] =&gt; a\n            [Value] =&gt; 0510\n        )\n\n    [Port_of_Lodgement_of_Document] =&gt; Array\n        (\n            [Length] =&gt; 4\n            [DataType] =&gt; a\n            [Value] =&gt; 1190\n        )\n\n    [Message_Function] =&gt; Array\n        (\n            [Length] =&gt; 1\n            [DataType] =&gt; a\n            [Value] =&gt; 9\n        )\n\n    [DETAIL] =&gt; Array\n        (\n            [0] =&gt; Array\n                (\n                    [Master_AWB_Number] =&gt; Array\n                        (\n                            [Length] =&gt; 11\n                            [DataType] =&gt; a\n                            [Type] =&gt; DETAIL\n                            [Require] =&gt; Yes\n                            [Value] =&gt; 21802357002\n                        )\n\n                    [Number_of_Package] =&gt; Array\n                        (\n                            [Length] =&gt; 4\n                            [DataType] =&gt; n\n                            [Type] =&gt; DETAIL\n                            [Require] =&gt; Yes\n                            [Value] =&gt; 3\n                        )\n\n                    [Unit_of_Package] =&gt; Array\n                        (\n                            [Length] =&gt; 2\n                            [DataType] =&gt; a\n                            [Type] =&gt; DETAIL\n                            [Require] =&gt; Yes\n                            [Value] =&gt; PK\n                        )\n\n                    [Weight] =&gt; Array\n                        (\n                            [Length] =&gt; 15\n                            [DataType] =&gt; d2\n                            [Type] =&gt; DETAIL\n                            [Require] =&gt; Yes\n                            [Value] =&gt; 37\n                        )\n\n                    [Unit_of_Weight] =&gt; Array\n                        (\n                            [Length] =&gt; 3\n                            [DataType] =&gt; a\n                            [Type] =&gt; DETAIL\n                            [Require] =&gt; Yes\n                            [Value] =&gt; KGM\n                        )\n\n                    [ISO_origin_country_code] =&gt; Array\n                        (\n                            [Length] =&gt; 2\n                            [DataType] =&gt; a\n                            [Value] =&gt; HK\n                        )\n\n                    [Port_of_Loading] =&gt; Array\n                        (\n                            [Length] =&gt; 3\n                            [DataType] =&gt; a\n                            [Value] =&gt; HKG\n                        )\n\n                    [ISO_destination_port_code] =&gt; Array\n                        (\n                            [Length] =&gt; 3\n                            [DataType] =&gt; a\n                            [Value] =&gt; BKK\n                        )\n\n                    [Processing_Indication] =&gt; Array\n                        (\n                            [Length] =&gt; 2\n                            [DataType] =&gt; a\n                            [Value] =&gt; 23\n                        )\n\n                    [Goods_description] =&gt; Array\n                        (\n                            [Length] =&gt; 16\n                            [DataType] =&gt; a\n                            [Value] =&gt; SHIP SPARES 2\n                        )\n\n                )\n\n            [1] =&gt; Array\n                (\n                    [Master_AWB_Number] =&gt; Array\n                        (\n                            [Length] =&gt; 11\n                            [DataType] =&gt; a\n                            [Type] =&gt; DETAIL\n                            [Require] =&gt; Yes\n                            [Value] =&gt; 21802237303\n                        )\n\n                    [Number_of_Package] =&gt; Array\n                        (\n                            [Length] =&gt; 4\n                            [DataType] =&gt; n\n                            [Type] =&gt; DETAIL\n                            [Require] =&gt; Yes\n                            [Value] =&gt; 3\n                        )\n\n                    [Unit_of_Package] =&gt; Array\n                        (\n                            [Length] =&gt; 2\n                            [DataType] =&gt; a\n                            [Type] =&gt; DETAIL\n                            [Require] =&gt; Yes\n                            [Value] =&gt; PK\n                        )\n\n                    [Weight] =&gt; Array\n                        (\n                            [Length] =&gt; 15\n                            [DataType] =&gt; d2\n                            [Type] =&gt; DETAIL\n                            [Require] =&gt; Yes\n                            [Value] =&gt; 2\n                        )\n\n                    [Unit_of_Weight] =&gt; Array\n                        (\n                            [Length] =&gt; 3\n                            [DataType] =&gt; a\n                            [Type] =&gt; DETAIL\n                            [Require] =&gt; Yes\n                            [Value] =&gt; KGM\n                        )\n\n                    [ISO_origin_country_code] =&gt; Array\n                        (\n                            [Length] =&gt; 2\n                            [DataType] =&gt; a\n                            [Value] =&gt; HK\n                        )\n\n                    [Port_of_Loading] =&gt; Array\n                        (\n                            [Length] =&gt; 3\n                            [DataType] =&gt; a\n                            [Value] =&gt; HKG\n                        )\n\n                    [ISO_destination_port_code] =&gt; Array\n                        (\n                            [Length] =&gt; 3\n                            [DataType] =&gt; a\n                            [Value] =&gt; BKK\n                        )\n\n                    [Processing_Indication] =&gt; Array\n                        (\n                            [Length] =&gt; 2\n                            [DataType] =&gt; a\n                            [Value] =&gt; 23\n                        )\n\n                    [Goods_description] =&gt; Array\n                        (\n                            [Length] =&gt; 16\n                            [DataType] =&gt; a\n                            [Value] =&gt; CONSOL 3\n                        )\n\n                )\n\n        )\n\n)\n&lt;/pre&gt;&lt;pre&gt;Array\n(\n    [0] =&gt; Array\n        (\n            [ReferenceNo] =&gt; Array\n                (\n                    [Length] =&gt; 13\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; ACYN\n                )\n\n            [RecvControlNo] =&gt; Array\n                (\n                    [Length] =&gt; 17\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ProcessIndicator] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 23\n                )\n\n            [MessageFunction] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 9\n                )\n\n            [UserId] =&gt; Array\n                (\n                    [Length] =&gt; 17\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 31010006340000001\n                )\n\n            [UniqueConsignmentReference(UCR)] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorReferenceID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ForwarderAssignedID] =&gt; Array\n                (\n                    [Length] =&gt; 6\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 000000\n                )\n\n            [ConsignorID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorTaxReference] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorName] =&gt; Array\n                (\n                    [Length] =&gt; 70\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorStreet] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorDistrict] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorSubProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorPostCode] =&gt; Array\n                (\n                    [Length] =&gt; 9\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorCountryCode] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; OT\n                )\n\n            [ConsignorNameAddressUnstructured] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorContactName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorCommunicationNumber] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorCommunicationType] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeTaxReference] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeToOrderOfIndicator] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeName] =&gt; Array\n                (\n                    [Length] =&gt; 70\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeStreet] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeDistrict] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeSubProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneePostCode] =&gt; Array\n                (\n                    [Length] =&gt; 9\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeCountryCode] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; OT\n                )\n\n            [ConsigneeNameAddressUnstructured] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeContactName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeCommunicationNumber] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeCommunicationType] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyTaxReference] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyToOrderOfIndicator] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyName] =&gt; Array\n                (\n                    [Length] =&gt; 70\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyStreet] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyDistrict] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartySubProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyPostCode] =&gt; Array\n                (\n                    [Length] =&gt; 9\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyCountryCode] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; OT\n                )\n\n            [NotifyPartyNameAddressUnstructured] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyContactName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyCommunicationNumber] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyCommunicationType] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierTaxReference] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; 0107537001757\n                )\n\n            [CarrierName] =&gt; Array\n                (\n                    [Length] =&gt; 70\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierStreet] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierDistrict] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierSubProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierPostCode] =&gt; Array\n                (\n                    [Length] =&gt; 9\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierCountryCode] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierNameAddressUnstructured] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierContactName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierCommunicationNumber] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierCommunicationType] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [OtherPartyFunctionCode] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [OtherID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [OtherTaxReference] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [OtherName] =&gt; Array\n                (\n                    [Length] =&gt; 70\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [OtherStreet] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [OtherDistrict] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [OtherSubProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [OtherProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [OtherPostCode] =&gt; Array\n                (\n                    [Length] =&gt; 9\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [OtherCountryCode] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [OtherNameAddressUnstructured] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [OtherContactName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [OtherCommunicationNumber] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [OtherCommunicationType] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [TransportMeansId] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [TransportMeansText] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [TransportMeansJourneyID] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; TG625\n                )\n\n            [TransportMeansIdentificationText] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; TG625\n                )\n\n            [LoadingLocationID] =&gt; Array\n                (\n                    [Length] =&gt; 5\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; HKHKG\n                )\n\n            [LoadingLocationName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [DischargeLocationID] =&gt; Array\n                (\n                    [Length] =&gt; 5\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; THBKK\n                )\n\n            [DischargeLocationName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [DeliveryLocationID] =&gt; Array\n                (\n                    [Length] =&gt; 4\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 1190\n                )\n\n            [DeliveryLocationName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [Pre-carriageModeCode] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [Pre-carriageModeText] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [PreLocationID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [PreLocationName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [AdditionalInformationCode] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [AdditionalInformationText] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ItemID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [MasterBLNo] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 21802357002\n                )\n\n            [HouseNo] =&gt; Array\n                (\n                    [Length] =&gt; 5\n                    [DataType] =&gt; n\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 99999\n                )\n\n            [ItemTransportEquipmentID] =&gt; Array\n                (\n                    [Length] =&gt; 17\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; No\n                    [Value] =&gt; N/A\n                )\n\n            [ItemDescription] =&gt; Array\n                (\n                    [Length] =&gt; 512\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; No\n                    [Value] =&gt; SHIP SPARES 2\n                )\n\n            [ShippingMark] =&gt; Array\n                (\n                    [Length] =&gt; 512\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; No\n                    [Value] =&gt; NO SHIPPING MARK\n                )\n\n            [NumberOfPackages] =&gt; Array\n                (\n                    [Length] =&gt; 8\n                    [DataType] =&gt; n\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 3\n                )\n\n            [UnitOfPackages] =&gt; Array\n                (\n                    [Length] =&gt; 3\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; PK\n                )\n\n            [Measure] =&gt; Array\n                (\n                    [Length] =&gt; 12\n                    [DataType] =&gt; d3\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 37\n                )\n\n            [MeasureUnitCode] =&gt; Array\n                (\n                    [Length] =&gt; 3\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; KGM\n                )\n\n            [Volumn] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [VolumnUnitCode] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [LastEntry] =&gt; Array\n                (\n                    [Length] =&gt; 1\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; Y\n                )\n\n            [TransportEquipmentID] =&gt; Array\n                (\n                    [Length] =&gt; 17\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; TG625\n                )\n\n            [SizeAndTypeCoded] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [SizeAndTypeText] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [SealID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [SealingPartyRoleCode] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [SealingPartyRoleText] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ExpectedDateAndTime] =&gt; Array\n                (\n                    [Value] =&gt; 2017-06-07\n                )\n\n            [FlightTime] =&gt; Array\n                (\n                    [Value] =&gt; 05:10:00\n                )\n\n            [IndType] =&gt; Array\n                (\n                    [Value] =&gt; 23\n                )\n\n            [ForwarderTaxReference] =&gt; Array\n                (\n                    [Value] =&gt; 0107537001757\n                )\n\n            [TotalNumberOfPackages] =&gt; Array\n                (\n                    [Value] =&gt; 3\n                )\n\n            [TotalMeasure] =&gt; Array\n                (\n                    [Value] =&gt; 37\n                )\n\n            [EFreight] =&gt; Array\n                (\n                    [Value] =&gt; 0\n                )\n\n        )\n\n    [1] =&gt; Array\n        (\n            [ReferenceNo] =&gt; Array\n                (\n                    [Length] =&gt; 13\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; ACYN\n                )\n\n            [RecvControlNo] =&gt; Array\n                (\n                    [Length] =&gt; 17\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ProcessIndicator] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 23\n                )\n\n            [MessageFunction] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 9\n                )\n\n            [UserId] =&gt; Array\n                (\n                    [Length] =&gt; 17\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 31010006340000001\n                )\n\n            [UniqueConsignmentReference(UCR)] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorReferenceID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ForwarderAssignedID] =&gt; Array\n                (\n                    [Length] =&gt; 6\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 000000\n                )\n\n            [ConsignorID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorTaxReference] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorName] =&gt; Array\n                (\n                    [Length] =&gt; 70\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorStreet] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorDistrict] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorSubProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorPostCode] =&gt; Array\n                (\n                    [Length] =&gt; 9\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorCountryCode] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; OT\n                )\n\n            [ConsignorNameAddressUnstructured] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorContactName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorCommunicationNumber] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsignorCommunicationType] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeTaxReference] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeToOrderOfIndicator] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeName] =&gt; Array\n                (\n                    [Length] =&gt; 70\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeStreet] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeDistrict] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeSubProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneePostCode] =&gt; Array\n                (\n                    [Length] =&gt; 9\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeCountryCode] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; OT\n                )\n\n            [ConsigneeNameAddressUnstructured] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeContactName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeCommunicationNumber] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ConsigneeCommunicationType] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyTaxReference] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyToOrderOfIndicator] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyName] =&gt; Array\n                (\n                    [Length] =&gt; 70\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyStreet] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyDistrict] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartySubProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyPostCode] =&gt; Array\n                (\n                    [Length] =&gt; 9\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyCountryCode] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; OT\n                )\n\n            [NotifyPartyNameAddressUnstructured] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyContactName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyCommunicationNumber] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [NotifyPartyCommunicationType] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierTaxReference] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; 0107537001757\n                )\n\n            [CarrierName] =&gt; Array\n                (\n                    [Length] =&gt; 70\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierStreet] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierDistrict] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierSubProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierPostCode] =&gt; Array\n                (\n                    [Length] =&gt; 9\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierCountryCode] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierNameAddressUnstructured] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierContactName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierCommunicationNumber] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [CarrierCommunicationType] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [OtherPartyFunctionCode] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [OtherID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [OtherTaxReference] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [OtherName] =&gt; Array\n                (\n                    [Length] =&gt; 70\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [OtherStreet] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [OtherDistrict] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [OtherSubProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [OtherProvince] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [OtherPostCode] =&gt; Array\n                (\n                    [Length] =&gt; 9\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [OtherCountryCode] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [OtherNameAddressUnstructured] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [OtherContactName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [OtherCommunicationNumber] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [OtherCommunicationType] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [TransportMeansId] =&gt; Array\n                (\n                    [Length] =&gt; 2\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; N/A\n                )\n\n            [TransportMeansText] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [TransportMeansJourneyID] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; TG625\n                )\n\n            [TransportMeansIdentificationText] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; TG625\n                )\n\n            [LoadingLocationID] =&gt; Array\n                (\n                    [Length] =&gt; 5\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; HKHKG\n                )\n\n            [LoadingLocationName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [DischargeLocationID] =&gt; Array\n                (\n                    [Length] =&gt; 5\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; THBKK\n                )\n\n            [DischargeLocationName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [DeliveryLocationID] =&gt; Array\n                (\n                    [Length] =&gt; 4\n                    [DataType] =&gt; a\n                    [Type] =&gt; HEAD\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 1190\n                )\n\n            [DeliveryLocationName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [Pre-carriageModeCode] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [Pre-carriageModeText] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [PreLocationID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [PreLocationName] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [AdditionalInformationCode] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [AdditionalInformationText] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ItemID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [MasterBLNo] =&gt; Array\n                (\n                    [Length] =&gt; 35\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 21802237303\n                )\n\n            [HouseNo] =&gt; Array\n                (\n                    [Length] =&gt; 5\n                    [DataType] =&gt; n\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 99999\n                )\n\n            [ItemTransportEquipmentID] =&gt; Array\n                (\n                    [Length] =&gt; 17\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; No\n                    [Value] =&gt; N/A\n                )\n\n            [ItemDescription] =&gt; Array\n                (\n                    [Length] =&gt; 512\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; No\n                    [Value] =&gt; CONSOL 3\n                )\n\n            [ShippingMark] =&gt; Array\n                (\n                    [Length] =&gt; 512\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; No\n                    [Value] =&gt; NO SHIPPING MARK\n                )\n\n            [NumberOfPackages] =&gt; Array\n                (\n                    [Length] =&gt; 8\n                    [DataType] =&gt; n\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 3\n                )\n\n            [UnitOfPackages] =&gt; Array\n                (\n                    [Length] =&gt; 3\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; PK\n                )\n\n            [Measure] =&gt; Array\n                (\n                    [Length] =&gt; 12\n                    [DataType] =&gt; d3\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; 2\n                )\n\n            [MeasureUnitCode] =&gt; Array\n                (\n                    [Length] =&gt; 3\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; KGM\n                )\n\n            [Volumn] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [VolumnUnitCode] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [LastEntry] =&gt; Array\n                (\n                    [Length] =&gt; 1\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; Y\n                )\n\n            [TransportEquipmentID] =&gt; Array\n                (\n                    [Length] =&gt; 17\n                    [DataType] =&gt; a\n                    [Type] =&gt; DETAIL\n                    [Require] =&gt; Yes\n                    [Value] =&gt; TG625\n                )\n\n            [SizeAndTypeCoded] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [SizeAndTypeText] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [SealID] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [SealingPartyRoleCode] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [SealingPartyRoleText] =&gt; Array\n                (\n                    [Length] =&gt; \n                    [DataType] =&gt; a\n                    [Value] =&gt; N/A\n                )\n\n            [ExpectedDateAndTime] =&gt; Array\n                (\n                    [Value] =&gt; 2017-06-07\n                )\n\n            [FlightTime] =&gt; Array\n                (\n                    [Value] =&gt; 05:10:00\n                )\n\n            [IndType] =&gt; Array\n                (\n                    [Value] =&gt; 23\n                )\n\n            [ForwarderTaxReference] =&gt; Array\n                (\n                    [Value] =&gt; 0107537001757\n                )\n\n            [TotalNumberOfPackages] =&gt; Array\n                (\n                    [Value] =&gt; 3\n                )\n\n            [TotalMeasure] =&gt; Array\n                (\n                    [Value] =&gt; 2\n                )\n\n            [EFreight] =&gt; Array\n                (\n                    [Value] =&gt; 0\n                )\n\n        )\n\n)\n&lt;/pre&gt;SELECT VH.VH_ID, VD.VD_ID\n                           FROM vsedhead VH LEFT JOIN vseddetail VD\n                             ON VH.VH_ID = VD.VD_HID\n                          WHERE (VH.VH_UserID &lt;&gt; ''\n                            AND  VH.VH_UserID &lt;&gt; 'N/A'\n                            AND  VH.VH_MessageFunction &lt;&gt; ''\n                            AND  VD.VD_MessageFunction &lt;&gt; '')\n                            AND VH.VH_UserID = '31010006340000001'\n                            AND VH.VH_status = 'Pending'\n                            AND VD.VD_status = 'Pending'\n                          ORDER BY VH.VH_ID DESC\nSELECT VH.*, VD.*\n                                   FROM vsedhead VH LEFT JOIN vseddetail VD\n                                     ON VH.VH_ID = VD.VD_HID\n                                  WHERE VH.VH_ID = '843674'\n                                    AND VD.VD_ID = '62074'\nSELECT Company\n                                 FROM tab_airline\n                                 WHERE Code = 'TG' and Company='TG' and `port` is null\nSELECT Company\n                                        FROM tab_airline\n                                        WHERE Code = 'TG' and Company='TG' and port='THBKK'\nTG==TGfinish"</msg>
+<status status="PASS" endtime="20170607 00:02:38.515" starttime="20170607 00:02:11.192"></status>
 </kw>
-<kw name="Read Command Output" library="SSHLibrary">
-<doc>Returns outputs of the most recent started command.</doc>
-<assign>
-<var>${parsermsg}</var>
-</assign>
-<msg timestamp="20170606 01:48:40.686" level="INFO">Reading output of command 'cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php'.</msg>
-<msg timestamp="20170606 01:49:09.143" level="INFO">Command exited with return code 0.</msg>
-<msg timestamp="20170606 01:49:09.148" level="INFO">${parsermsg} = 
-FFM_DataTest.txt&lt;br&gt;&lt;pre&gt;Array
-(
-    [Message_Header] =&gt; Array
-        (
-            [Value] =&gt; FFM
-        )
-
-    [Message_Version] =&gt; Array
-        (
-            [Value] =&gt; 8
-        )
-
-    [Delay]...</msg>
-<status status="PASS" endtime="20170606 01:49:09.148" starttime="20170606 01:48:40.683"></status>
+<msg timestamp="20170607 00:02:38.516" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:38.516" starttime="20170607 00:02:11.191"></status>
 </kw>
-<kw name="Log To Console" library="BuiltIn">
-<doc>Logs the given message to the console.</doc>
-<arguments>
-<arg>${parsermsg}</arg>
-</arguments>
-<status status="PASS" endtime="20170606 01:49:09.190" starttime="20170606 01:49:09.149"></status>
-</kw>
-<status status="PASS" endtime="20170606 01:49:09.191" starttime="20170606 01:48:40.569"></status>
-</kw>
-<kw name="Check File should delete in Input path" library="keyword">
+<kw name="Check File should delete in Input path" library="ShareScript">
 <arguments>
 <arg>${fileName}</arg>
 </arguments>
+<msg timestamp="20170607 00:02:38.517" level="TRACE">Arguments: [ ${fileName}='MFI_DataTest' ]</msg>
 <kw name="File Should Not Exist" library="SSHLibrary">
 <doc>Fails if the given `path` points to an existing file.</doc>
 <arguments>
 <arg>/var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt</arg>
 </arguments>
-<status status="PASS" endtime="20170606 01:49:09.256" starttime="20170606 01:49:09.191"></status>
+<msg timestamp="20170607 00:02:38.518" level="TRACE">Arguments: [ '/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt' ]</msg>
+<msg timestamp="20170607 00:02:38.518" level="DEBUG">[chan 1] stat('/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt')</msg>
+<msg timestamp="20170607 00:02:38.573" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:38.573" starttime="20170607 00:02:38.518"></status>
 </kw>
-<status status="PASS" endtime="20170606 01:49:09.256" starttime="20170606 01:49:09.191"></status>
+<msg timestamp="20170607 00:02:38.574" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:38.574" starttime="20170607 00:02:38.517"></status>
 </kw>
-<kw name="Check File should transfer in backup folder" library="keyword">
+<kw name="Check File should transfer in backup folder" library="ShareScript">
 <arguments>
 <arg>${fileName}</arg>
 </arguments>
+<msg timestamp="20170607 00:02:38.575" level="TRACE">Arguments: [ ${fileName}='MFI_DataTest' ]</msg>
 <kw name="Get Current Date" library="DateTime">
 <doc>Returns current local or UTC time with an optional increment.</doc>
 <assign>
 <var>${CurrentDate}</var>
 </assign>
-<msg timestamp="20170606 01:49:09.258" level="INFO">${CurrentDate} = 2017-06-06 01:49:09.258</msg>
-<status status="PASS" endtime="20170606 01:49:09.258" starttime="20170606 01:49:09.258"></status>
+<msg timestamp="20170607 00:02:38.575" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20170607 00:02:38.575" level="TRACE">Return: b'2017-06-07 00:02:38.575'</msg>
+<msg timestamp="20170607 00:02:38.575" level="INFO">${CurrentDate} = 2017-06-07 00:02:38.575</msg>
+<status status="PASS" endtime="20170607 00:02:38.575" starttime="20170607 00:02:38.575"></status>
 </kw>
 <kw name="Get Substring" library="String">
 <doc>Returns a substring from ``start`` index to ``end`` index.</doc>
@@ -297,8 +287,10 @@ FFM_DataTest.txt&lt;br&gt;&lt;pre&gt;Array
 <assign>
 <var>${Year}</var>
 </assign>
-<msg timestamp="20170606 01:49:09.259" level="INFO">${Year} = 2017</msg>
-<status status="PASS" endtime="20170606 01:49:09.259" starttime="20170606 01:49:09.258"></status>
+<msg timestamp="20170607 00:02:38.576" level="TRACE">Arguments: [ b'2017-06-07 00:02:38.575' | '0' | '4' ]</msg>
+<msg timestamp="20170607 00:02:38.576" level="TRACE">Return: b'2017'</msg>
+<msg timestamp="20170607 00:02:38.576" level="INFO">${Year} = 2017</msg>
+<status status="PASS" endtime="20170607 00:02:38.576" starttime="20170607 00:02:38.576"></status>
 </kw>
 <kw name="Get Substring" library="String">
 <doc>Returns a substring from ``start`` index to ``end`` index.</doc>
@@ -310,8 +302,10 @@ FFM_DataTest.txt&lt;br&gt;&lt;pre&gt;Array
 <assign>
 <var>${Month}</var>
 </assign>
-<msg timestamp="20170606 01:49:09.260" level="INFO">${Month} = 06</msg>
-<status status="PASS" endtime="20170606 01:49:09.260" starttime="20170606 01:49:09.259"></status>
+<msg timestamp="20170607 00:02:38.576" level="TRACE">Arguments: [ b'2017-06-07 00:02:38.575' | '5' | '7' ]</msg>
+<msg timestamp="20170607 00:02:38.577" level="TRACE">Return: b'06'</msg>
+<msg timestamp="20170607 00:02:38.577" level="INFO">${Month} = 06</msg>
+<status status="PASS" endtime="20170607 00:02:38.577" starttime="20170607 00:02:38.576"></status>
 </kw>
 <kw name="Get Substring" library="String">
 <doc>Returns a substring from ``start`` index to ``end`` index.</doc>
@@ -323,24 +317,31 @@ FFM_DataTest.txt&lt;br&gt;&lt;pre&gt;Array
 <assign>
 <var>${Date}</var>
 </assign>
-<msg timestamp="20170606 01:49:09.261" level="INFO">${Date} = 06</msg>
-<status status="PASS" endtime="20170606 01:49:09.261" starttime="20170606 01:49:09.260"></status>
+<msg timestamp="20170607 00:02:38.577" level="TRACE">Arguments: [ b'2017-06-07 00:02:38.575' | '8' | '10' ]</msg>
+<msg timestamp="20170607 00:02:38.577" level="TRACE">Return: b'07'</msg>
+<msg timestamp="20170607 00:02:38.577" level="INFO">${Date} = 07</msg>
+<status status="PASS" endtime="20170607 00:02:38.577" starttime="20170607 00:02:38.577"></status>
 </kw>
 <kw name="File Should Exist" library="SSHLibrary">
 <doc>Fails if the given `path` does NOT point to an existing file.</doc>
 <arguments>
 <arg>/var/www/html/manifest/AIM_Files/Input_TG/backup/${Year}_${Month}_${Date}/${fileName}.txt</arg>
 </arguments>
-<status status="PASS" endtime="20170606 01:49:09.296" starttime="20170606 01:49:09.261"></status>
+<msg timestamp="20170607 00:02:38.578" level="TRACE">Arguments: [ '/var/www/html/manifest/AIM_Files/Input_TG/backup/2017_06_07/MFI_DataTest.txt' ]</msg>
+<msg timestamp="20170607 00:02:38.578" level="DEBUG">[chan 1] stat('/var/www/html/manifest/AIM_Files/Input_TG/backup/2017_06_07/MFI_DataTest.txt')</msg>
+<msg timestamp="20170607 00:02:38.594" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:38.594" starttime="20170607 00:02:38.577"></status>
 </kw>
-<status status="PASS" endtime="20170606 01:49:09.297" starttime="20170606 01:49:09.257"></status>
+<msg timestamp="20170607 00:02:38.594" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:38.594" starttime="20170607 00:02:38.574"></status>
 </kw>
 <kw name="Check database Flight should insert and status is Send">
 <arguments>
-<arg>22</arg>
+<arg>23</arg>
 <arg>${FlightNo}</arg>
 <arg>${FlightDate}</arg>
 </arguments>
+<msg timestamp="20170607 00:02:38.595" level="TRACE">Arguments: [ ${Indicator}='23' | ${FlightNo}='TG 625' | ${FlightDate}='07062017' ]</msg>
 <kw name="Remove String" library="String">
 <doc>Removes all ``removables`` from the given ``string``.</doc>
 <arguments>
@@ -350,20 +351,24 @@ FFM_DataTest.txt&lt;br&gt;&lt;pre&gt;Array
 <assign>
 <var>${FlightNoToQuery}</var>
 </assign>
-<msg timestamp="20170606 01:49:09.303" level="INFO">${FlightNoToQuery} = TG600</msg>
-<status status="PASS" endtime="20170606 01:49:09.303" starttime="20170606 01:49:09.302"></status>
+<msg timestamp="20170607 00:02:38.595" level="TRACE">Arguments: [ 'TG 625' | b' ' ]</msg>
+<msg timestamp="20170607 00:02:38.595" level="TRACE">Return: 'TG625'</msg>
+<msg timestamp="20170607 00:02:38.595" level="INFO">${FlightNoToQuery} = TG625</msg>
+<status status="PASS" endtime="20170607 00:02:38.595" starttime="20170607 00:02:38.595"></status>
 </kw>
 <kw name="Convert Date" library="DateTime">
 <doc>Converts between supported `date formats`.</doc>
 <arguments>
 <arg>${FlightDate}</arg>
-<arg>date_format=%d%b</arg>
+<arg>date_format=%d%m%Y</arg>
 </arguments>
 <assign>
 <var>${ConvFlightDate}</var>
 </assign>
-<msg timestamp="20170606 01:49:09.315" level="INFO">${ConvFlightDate} = 1900-06-05 00:00:00.000</msg>
-<status status="PASS" endtime="20170606 01:49:09.316" starttime="20170606 01:49:09.304"></status>
+<msg timestamp="20170607 00:02:38.596" level="TRACE">Arguments: [ '07062017' | date_format='%d%m%Y' ]</msg>
+<msg timestamp="20170607 00:02:38.609" level="TRACE">Return: b'2017-06-07 00:00:00.000'</msg>
+<msg timestamp="20170607 00:02:38.610" level="INFO">${ConvFlightDate} = 2017-06-07 00:00:00.000</msg>
+<status status="PASS" endtime="20170607 00:02:38.610" starttime="20170607 00:02:38.596"></status>
 </kw>
 <kw name="Get Substring" library="String">
 <doc>Returns a substring from ``start`` index to ``end`` index.</doc>
@@ -373,56 +378,26 @@ FFM_DataTest.txt&lt;br&gt;&lt;pre&gt;Array
 <arg>10</arg>
 </arguments>
 <assign>
-<var>${FlightDateResult}</var>
-</assign>
-<msg timestamp="20170606 01:49:09.318" level="INFO">${FlightDateResult} = 1900-06-05</msg>
-<status status="PASS" endtime="20170606 01:49:09.319" starttime="20170606 01:49:09.316"></status>
-</kw>
-<kw name="Get Current Date" library="DateTime">
-<doc>Returns current local or UTC time with an optional increment.</doc>
-<assign>
-<var>${CurrentDate}</var>
-</assign>
-<msg timestamp="20170606 01:49:09.320" level="INFO">${CurrentDate} = 2017-06-06 01:49:09.320</msg>
-<status status="PASS" endtime="20170606 01:49:09.320" starttime="20170606 01:49:09.319"></status>
-</kw>
-<kw name="Get Substring" library="String">
-<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
-<arguments>
-<arg>${CurrentDate}</arg>
-<arg>0</arg>
-<arg>4</arg>
-</arguments>
-<assign>
-<var>${FlightDateReplaceYear}</var>
-</assign>
-<msg timestamp="20170606 01:49:09.321" level="INFO">${FlightDateReplaceYear} = 2017</msg>
-<status status="PASS" endtime="20170606 01:49:09.321" starttime="20170606 01:49:09.320"></status>
-</kw>
-<kw name="Replace String" library="String">
-<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
-<arguments>
-<arg>${FlightDateResult}</arg>
-<arg>1900</arg>
-<arg>${FlightDateReplaceYear}</arg>
-</arguments>
-<assign>
 <var>${FlightDateToQuery}</var>
 </assign>
-<msg timestamp="20170606 01:49:09.323" level="INFO">${FlightDateToQuery} = 2017-06-05</msg>
-<status status="PASS" endtime="20170606 01:49:09.324" starttime="20170606 01:49:09.322"></status>
+<msg timestamp="20170607 00:02:38.610" level="TRACE">Arguments: [ b'2017-06-07 00:00:00.000' | '0' | '10' ]</msg>
+<msg timestamp="20170607 00:02:38.610" level="TRACE">Return: b'2017-06-07'</msg>
+<msg timestamp="20170607 00:02:38.610" level="INFO">${FlightDateToQuery} = 2017-06-07</msg>
+<status status="PASS" endtime="20170607 00:02:38.610" starttime="20170607 00:02:38.610"></status>
 </kw>
 <kw name="Query" library="DatabaseLibrary">
 <doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional</doc>
 <arguments>
-<arg>SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' and vsedhead.VH_DocumentType = '${Indicator}'</arg>
+<arg>SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' AND vsedhead.VH_DocumentType = '${Indicator}'</arg>
 </arguments>
 <assign>
 <var>${FlightData}</var>
 </assign>
-<msg timestamp="20170606 01:49:09.325" level="INFO">Executing : Query  |  SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG600' AND vseddetail.VD_FlightDate = '2017-06-05' and vsedhead.VH_DocumentType = '22' </msg>
-<msg timestamp="20170606 01:49:09.413" level="INFO">${FlightData} = (('Sent',),)</msg>
-<status status="PASS" endtime="20170606 01:49:09.413" starttime="20170606 01:49:09.324"></status>
+<msg timestamp="20170607 00:02:38.611" level="TRACE">Arguments: [ "SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG625' AND vseddetail.VD_FlightDate = '2017-06-07' AND vsedhead.VH_DocumentType = '23'" ]</msg>
+<msg timestamp="20170607 00:02:38.611" level="INFO">Executing : Query  |  SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG625' AND vseddetail.VD_FlightDate = '2017-06-07' AND vsedhead.VH_DocumentType = '23' </msg>
+<msg timestamp="20170607 00:02:38.641" level="TRACE">Return: ((b'Sent',),)</msg>
+<msg timestamp="20170607 00:02:38.641" level="INFO">${FlightData} = (('Sent',),)</msg>
+<status status="PASS" endtime="20170607 00:02:38.641" starttime="20170607 00:02:38.611"></status>
 </kw>
 <kw name="Should Be Equal" library="BuiltIn">
 <doc>Fails if the given objects are unequal.</doc>
@@ -430,19 +405,23 @@ FFM_DataTest.txt&lt;br&gt;&lt;pre&gt;Array
 <arg>${FlightData[0][0]}</arg>
 <arg>Sent</arg>
 </arguments>
-<msg timestamp="20170606 01:49:09.415" level="INFO">Argument types are:
+<msg timestamp="20170607 00:02:38.642" level="TRACE">Arguments: [ b'Sent' | 'Sent' ]</msg>
+<msg timestamp="20170607 00:02:38.642" level="INFO">Argument types are:
 &lt;type 'str'&gt;
 &lt;type 'unicode'&gt;</msg>
-<status status="PASS" endtime="20170606 01:49:09.416" starttime="20170606 01:49:09.414"></status>
+<msg timestamp="20170607 00:02:38.642" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:38.642" starttime="20170607 00:02:38.642"></status>
 </kw>
-<status status="PASS" endtime="20170606 01:49:09.416" starttime="20170606 01:49:09.299"></status>
+<msg timestamp="20170607 00:02:38.642" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:38.642" starttime="20170607 00:02:38.594"></status>
 </kw>
 <kw name="Output folder should visible XML File">
 <arguments>
-<arg>22</arg>
+<arg>23</arg>
 <arg>${FlightNo}</arg>
 <arg>${FlightDate}</arg>
 </arguments>
+<msg timestamp="20170607 00:02:38.643" level="TRACE">Arguments: [ ${Indicator}='23' | ${FlightNo}='TG 625' | ${FlightDate}='07062017' ]</msg>
 <kw name="Remove String" library="String">
 <doc>Removes all ``removables`` from the given ``string``.</doc>
 <arguments>
@@ -452,20 +431,24 @@ FFM_DataTest.txt&lt;br&gt;&lt;pre&gt;Array
 <assign>
 <var>${FlightNoToQuery}</var>
 </assign>
-<msg timestamp="20170606 01:49:09.421" level="INFO">${FlightNoToQuery} = TG600</msg>
-<status status="PASS" endtime="20170606 01:49:09.421" starttime="20170606 01:49:09.420"></status>
+<msg timestamp="20170607 00:02:38.644" level="TRACE">Arguments: [ 'TG 625' | b' ' ]</msg>
+<msg timestamp="20170607 00:02:38.644" level="TRACE">Return: 'TG625'</msg>
+<msg timestamp="20170607 00:02:38.644" level="INFO">${FlightNoToQuery} = TG625</msg>
+<status status="PASS" endtime="20170607 00:02:38.644" starttime="20170607 00:02:38.643"></status>
 </kw>
 <kw name="Convert Date" library="DateTime">
 <doc>Converts between supported `date formats`.</doc>
 <arguments>
 <arg>${FlightDate}</arg>
-<arg>date_format=%d%b</arg>
+<arg>date_format=%d%m%Y</arg>
 </arguments>
 <assign>
 <var>${ConvFlightDate}</var>
 </assign>
-<msg timestamp="20170606 01:49:09.423" level="INFO">${ConvFlightDate} = 1900-06-05 00:00:00.000</msg>
-<status status="PASS" endtime="20170606 01:49:09.423" starttime="20170606 01:49:09.421"></status>
+<msg timestamp="20170607 00:02:38.644" level="TRACE">Arguments: [ '07062017' | date_format='%d%m%Y' ]</msg>
+<msg timestamp="20170607 00:02:38.644" level="TRACE">Return: b'2017-06-07 00:00:00.000'</msg>
+<msg timestamp="20170607 00:02:38.644" level="INFO">${ConvFlightDate} = 2017-06-07 00:00:00.000</msg>
+<status status="PASS" endtime="20170607 00:02:38.645" starttime="20170607 00:02:38.644"></status>
 </kw>
 <kw name="Get Substring" library="String">
 <doc>Returns a substring from ``start`` index to ``end`` index.</doc>
@@ -475,88 +458,349 @@ FFM_DataTest.txt&lt;br&gt;&lt;pre&gt;Array
 <arg>10</arg>
 </arguments>
 <assign>
-<var>${FlightDateResult}</var>
-</assign>
-<msg timestamp="20170606 01:49:09.426" level="INFO">${FlightDateResult} = 1900-06-05</msg>
-<status status="PASS" endtime="20170606 01:49:09.426" starttime="20170606 01:49:09.424"></status>
-</kw>
-<kw name="Get Current Date" library="DateTime">
-<doc>Returns current local or UTC time with an optional increment.</doc>
-<assign>
-<var>${CurrentDate}</var>
-</assign>
-<msg timestamp="20170606 01:49:09.428" level="INFO">${CurrentDate} = 2017-06-06 01:49:09.427</msg>
-<status status="PASS" endtime="20170606 01:49:09.428" starttime="20170606 01:49:09.427"></status>
-</kw>
-<kw name="Get Substring" library="String">
-<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
-<arguments>
-<arg>${CurrentDate}</arg>
-<arg>0</arg>
-<arg>4</arg>
-</arguments>
-<assign>
-<var>${FlightDateReplaceYear}</var>
-</assign>
-<msg timestamp="20170606 01:49:09.430" level="INFO">${FlightDateReplaceYear} = 2017</msg>
-<status status="PASS" endtime="20170606 01:49:09.430" starttime="20170606 01:49:09.429"></status>
-</kw>
-<kw name="Replace String" library="String">
-<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
-<arguments>
-<arg>${FlightDateResult}</arg>
-<arg>1900</arg>
-<arg>${FlightDateReplaceYear}</arg>
-</arguments>
-<assign>
 <var>${FlightDateToQuery}</var>
 </assign>
-<msg timestamp="20170606 01:49:09.432" level="INFO">${FlightDateToQuery} = 2017-06-05</msg>
-<status status="PASS" endtime="20170606 01:49:09.432" starttime="20170606 01:49:09.431"></status>
+<msg timestamp="20170607 00:02:38.645" level="TRACE">Arguments: [ b'2017-06-07 00:00:00.000' | '0' | '10' ]</msg>
+<msg timestamp="20170607 00:02:38.645" level="TRACE">Return: b'2017-06-07'</msg>
+<msg timestamp="20170607 00:02:38.645" level="INFO">${FlightDateToQuery} = 2017-06-07</msg>
+<status status="PASS" endtime="20170607 00:02:38.645" starttime="20170607 00:02:38.645"></status>
 </kw>
 <kw name="Query" library="DatabaseLibrary">
 <doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional</doc>
 <arguments>
-<arg>SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' and vsedhead.VH_DocumentType = '${Indicator}'</arg>
+<arg>SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' AND vsedhead.VH_DocumentType = '${Indicator}'</arg>
 </arguments>
 <assign>
 <var>${DocumentNo}</var>
 </assign>
-<msg timestamp="20170606 01:49:09.434" level="INFO">Executing : Query  |  SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG600' AND vseddetail.VD_FlightDate = '2017-06-05' and vsedhead.VH_DocumentType = '22' </msg>
-<msg timestamp="20170606 01:49:09.519" level="INFO">${DocumentNo} = (('ACYNVV000I2XG',),)</msg>
-<status status="PASS" endtime="20170606 01:49:09.519" starttime="20170606 01:49:09.433"></status>
+<msg timestamp="20170607 00:02:38.646" level="TRACE">Arguments: [ "SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG625' AND vseddetail.VD_FlightDate = '2017-06-07' AND vsedhead.VH_DocumentType = '23'" ]</msg>
+<msg timestamp="20170607 00:02:38.646" level="INFO">Executing : Query  |  SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG625' AND vseddetail.VD_FlightDate = '2017-06-07' AND vsedhead.VH_DocumentType = '23' </msg>
+<msg timestamp="20170607 00:02:38.673" level="TRACE">Return: ((b'ACYNVV000I2ZE',),)</msg>
+<msg timestamp="20170607 00:02:38.673" level="INFO">${DocumentNo} = (('ACYNVV000I2ZE',),)</msg>
+<status status="PASS" endtime="20170607 00:02:38.673" starttime="20170607 00:02:38.645"></status>
 </kw>
 <kw name="File Should Exist" library="SSHLibrary">
 <doc>Fails if the given `path` does NOT point to an existing file.</doc>
 <arguments>
 <arg>/var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_${DocumentNo[0][0]}.xml</arg>
 </arguments>
-<status status="PASS" endtime="20170606 01:49:09.556" starttime="20170606 01:49:09.520"></status>
+<msg timestamp="20170607 00:02:38.674" level="TRACE">Arguments: [ '/var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_ACYNVV000I2ZE.xml' ]</msg>
+<msg timestamp="20170607 00:02:38.674" level="DEBUG">[chan 1] stat('/var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_ACYNVV000I2ZE.xml')</msg>
+<msg timestamp="20170607 00:02:38.686" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:38.686" starttime="20170607 00:02:38.673"></status>
 </kw>
-<status status="PASS" endtime="20170606 01:49:09.557" starttime="20170606 01:49:09.418"></status>
+<msg timestamp="20170607 00:02:38.686" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:38.686" starttime="20170607 00:02:38.643"></status>
 </kw>
 <kw type="teardown" name="Disconnect From Database" library="DatabaseLibrary">
 <doc>Disconnects from the database.</doc>
-<msg timestamp="20170606 01:49:09.559" level="INFO">Executing : Disconnect From Database</msg>
-<status status="PASS" endtime="20170606 01:49:09.560" starttime="20170606 01:49:09.559"></status>
+<msg timestamp="20170607 00:02:38.687" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20170607 00:02:38.687" level="INFO">Executing : Disconnect From Database</msg>
+<msg timestamp="20170607 00:02:38.687" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:38.688" starttime="20170607 00:02:38.687"></status>
 </kw>
-<status status="PASS" endtime="20170606 01:49:09.561" critical="yes" starttime="20170606 01:48:40.405"></status>
+<status status="PASS" endtime="20170607 00:02:38.688" critical="yes" starttime="20170607 00:02:11.137"></status>
+</test>
+<test id="s1-t3" name="Sign XML File and Send to gateway">
+<kw type="setup" name="Connect To Database AirManifest" library="ShareScript">
+<msg timestamp="20170607 00:02:38.692" level="TRACE">Arguments: [  ]</msg>
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to</doc>
+<arguments>
+<arg>pymysql</arg>
+<arg>manifest_air_test</arg>
+<arg>pattaraporn</arg>
+<arg>pattaraporn@netbay</arg>
+<arg>10.1.3.72</arg>
+<arg>3306</arg>
+</arguments>
+<msg timestamp="20170607 00:02:38.692" level="TRACE">Arguments: [ 'pymysql' | 'manifest_air_test' | 'pattaraporn' | 'pattaraporn@netbay' | '10.1.3.72' | '3306' ]</msg>
+<msg timestamp="20170607 00:02:38.692" level="INFO">Connecting using : pymysql.connect(db=manifest_air_test, user=pattaraporn, passwd=pattaraporn@netbay, host=10.1.3.72, port=3306, charset=None) </msg>
+<msg timestamp="20170607 00:02:38.745" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:38.745" starttime="20170607 00:02:38.692"></status>
+</kw>
+<msg timestamp="20170607 00:02:38.745" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:38.746" starttime="20170607 00:02:38.691"></status>
+</kw>
+<kw name="Run Script sign XML to send gateway" library="ShareScript">
+<msg timestamp="20170607 00:02:38.747" level="TRACE">Arguments: [  ]</msg>
+<kw name="Execute Command" library="SSHLibrary">
+<doc>Executes `command` on the remote machine and returns its outputs.</doc>
+<arguments>
+<arg>cd /var/www/html/manifest/AIM_Files/signManifestHttpOpt/ ; java -Dfile.encoding=utf-8 -jar SignOnlyHttpOption.jar -s /var/www/html/manifest/AIM_Files/Output_XML/TG -o /var/netbay/vas/ebxml/home/tg_test199/inbox -c /var/www/html/manifest/AIM_Files/CER/THAI_AIRWAYS.p12 -p 'Thaiair*7'</arg>
+</arguments>
+<assign>
+<var>${SignScript}</var>
+</assign>
+<msg timestamp="20170607 00:02:38.747" level="TRACE">Arguments: [ "cd /var/www/html/manifest/AIM_Files/signManifestHttpOpt/ ; java -Dfile.encoding=utf-8 -jar SignOnlyHttpOption.jar -s /var/www/html/manifest/AIM_Files/Output_XML/TG -o /var/netbay/vas/ebxml/home/tg_test199/inbox -c /var/www/html/manifest/AIM_Files/CER/THAI_AIRWAYS.p12 -p 'Thaiair*7'" ]</msg>
+<msg timestamp="20170607 00:02:38.747" level="INFO">Executing command 'cd /var/www/html/manifest/AIM_Files/signManifestHttpOpt/ ; java -Dfile.encoding=utf-8 -jar SignOnlyHttpOption.jar -s /var/www/html/manifest/AIM_Files/Output_XML/TG -o /var/netbay/vas/ebxml/home/tg_test199/inbox -c /var/www/html/manifest/AIM_Files/CER/THAI_AIRWAYS.p12 -p 'Thaiair*7''.</msg>
+<msg timestamp="20170607 00:02:38.748" level="DEBUG">[chan 6] Max packet in: 32768 bytes</msg>
+<msg timestamp="20170607 00:02:39.650" level="INFO">Command exited with return code 0.</msg>
+<msg timestamp="20170607 00:02:39.651" level="TRACE">Return: '8\ncert path : /var/www/html/manifest/AIM_Files/CER/THAI_AIRWAYS.p12\ncert password : Thaiair*7\nxml source folder : /var/www/html/manifest/AIM_Files/Output_XML/TG\nxml out folder : /var/netbay/vas/ebxml/home/tg_test199/inbox\noperate.... /var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_ACYNVV000I2ZE.xml\noperate.... /var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_ACYNVV000I2Z4.xml'</msg>
+<msg timestamp="20170607 00:02:39.651" level="INFO">${SignScript} = 8
+cert path : /var/www/html/manifest/AIM_Files/CER/THAI_AIRWAYS.p12
+cert password : Thaiair*7
+xml source folder : /var/www/html/manifest/AIM_Files/Output_XML/TG
+xml out folder : /var/netbay/vas/ebxml/...</msg>
+<status status="PASS" endtime="20170607 00:02:39.651" starttime="20170607 00:02:38.747"></status>
+</kw>
+<msg timestamp="20170607 00:02:39.651" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:39.651" starttime="20170607 00:02:38.746"></status>
+</kw>
+<kw name="Output folder should not visible XML files">
+<arguments>
+<arg>23</arg>
+<arg>${FlightNo}</arg>
+<arg>${FlightDate}</arg>
+</arguments>
+<msg timestamp="20170607 00:02:39.653" level="TRACE">Arguments: [ ${Indicator}='23' | ${FlightNo}='TG 625' | ${FlightDate}='07062017' ]</msg>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${FlightNo}</arg>
+<arg>${SPACE}</arg>
+</arguments>
+<assign>
+<var>${FlightNoToQuery}</var>
+</assign>
+<msg timestamp="20170607 00:02:39.653" level="TRACE">Arguments: [ 'TG 625' | b' ' ]</msg>
+<msg timestamp="20170607 00:02:39.654" level="TRACE">Return: 'TG625'</msg>
+<msg timestamp="20170607 00:02:39.654" level="INFO">${FlightNoToQuery} = TG625</msg>
+<status status="PASS" endtime="20170607 00:02:39.654" starttime="20170607 00:02:39.653"></status>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<doc>Converts between supported `date formats`.</doc>
+<arguments>
+<arg>${FlightDate}</arg>
+<arg>date_format=%d%m%Y</arg>
+</arguments>
+<assign>
+<var>${ConvFlightDate}</var>
+</assign>
+<msg timestamp="20170607 00:02:39.655" level="TRACE">Arguments: [ '07062017' | date_format='%d%m%Y' ]</msg>
+<msg timestamp="20170607 00:02:39.655" level="TRACE">Return: b'2017-06-07 00:00:00.000'</msg>
+<msg timestamp="20170607 00:02:39.655" level="INFO">${ConvFlightDate} = 2017-06-07 00:00:00.000</msg>
+<status status="PASS" endtime="20170607 00:02:39.655" starttime="20170607 00:02:39.654"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${ConvFlightDate}</arg>
+<arg>0</arg>
+<arg>10</arg>
+</arguments>
+<assign>
+<var>${FlightDateToQuery}</var>
+</assign>
+<msg timestamp="20170607 00:02:39.656" level="TRACE">Arguments: [ b'2017-06-07 00:00:00.000' | '0' | '10' ]</msg>
+<msg timestamp="20170607 00:02:39.657" level="TRACE">Return: b'2017-06-07'</msg>
+<msg timestamp="20170607 00:02:39.657" level="INFO">${FlightDateToQuery} = 2017-06-07</msg>
+<status status="PASS" endtime="20170607 00:02:39.657" starttime="20170607 00:02:39.655"></status>
+</kw>
+<kw name="Query" library="DatabaseLibrary">
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional</doc>
+<arguments>
+<arg>SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' AND vsedhead.VH_DocumentType = '${Indicator}'</arg>
+</arguments>
+<assign>
+<var>${DocumentNo}</var>
+</assign>
+<msg timestamp="20170607 00:02:39.658" level="TRACE">Arguments: [ "SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG625' AND vseddetail.VD_FlightDate = '2017-06-07' AND vsedhead.VH_DocumentType = '23'" ]</msg>
+<msg timestamp="20170607 00:02:39.658" level="INFO">Executing : Query  |  SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG625' AND vseddetail.VD_FlightDate = '2017-06-07' AND vsedhead.VH_DocumentType = '23' </msg>
+<msg timestamp="20170607 00:02:39.688" level="TRACE">Return: ((b'ACYNVV000I2ZE',),)</msg>
+<msg timestamp="20170607 00:02:39.688" level="INFO">${DocumentNo} = (('ACYNVV000I2ZE',),)</msg>
+<status status="PASS" endtime="20170607 00:02:39.688" starttime="20170607 00:02:39.657"></status>
+</kw>
+<kw name="File Should Not Exist" library="SSHLibrary">
+<doc>Fails if the given `path` points to an existing file.</doc>
+<arguments>
+<arg>/var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_${DocumentNo[0][0]}.xml</arg>
+</arguments>
+<msg timestamp="20170607 00:02:39.689" level="TRACE">Arguments: [ '/var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_ACYNVV000I2ZE.xml' ]</msg>
+<msg timestamp="20170607 00:02:39.689" level="DEBUG">[chan 1] stat('/var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_ACYNVV000I2ZE.xml')</msg>
+<msg timestamp="20170607 00:02:39.707" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:39.708" starttime="20170607 00:02:39.689"></status>
+</kw>
+<msg timestamp="20170607 00:02:39.708" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:39.708" starttime="20170607 00:02:39.652"></status>
+</kw>
+<kw type="teardown" name="Disconnect From Database" library="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<msg timestamp="20170607 00:02:39.709" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20170607 00:02:39.710" level="INFO">Executing : Disconnect From Database</msg>
+<msg timestamp="20170607 00:02:39.710" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:39.710" starttime="20170607 00:02:39.709"></status>
+</kw>
+<status status="PASS" endtime="20170607 00:02:39.710" critical="yes" starttime="20170607 00:02:38.691"></status>
+</test>
+<test id="s1-t4" name="Receive Response from gateway and update status">
+<kw type="setup" name="Connect To Database AirManifest" library="ShareScript">
+<msg timestamp="20170607 00:02:39.713" level="TRACE">Arguments: [  ]</msg>
+<kw name="Connect To Database" library="DatabaseLibrary">
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to</doc>
+<arguments>
+<arg>pymysql</arg>
+<arg>manifest_air_test</arg>
+<arg>pattaraporn</arg>
+<arg>pattaraporn@netbay</arg>
+<arg>10.1.3.72</arg>
+<arg>3306</arg>
+</arguments>
+<msg timestamp="20170607 00:02:39.713" level="TRACE">Arguments: [ 'pymysql' | 'manifest_air_test' | 'pattaraporn' | 'pattaraporn@netbay' | '10.1.3.72' | '3306' ]</msg>
+<msg timestamp="20170607 00:02:39.714" level="INFO">Connecting using : pymysql.connect(db=manifest_air_test, user=pattaraporn, passwd=pattaraporn@netbay, host=10.1.3.72, port=3306, charset=None) </msg>
+<msg timestamp="20170607 00:02:39.775" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:39.775" starttime="20170607 00:02:39.713"></status>
+</kw>
+<msg timestamp="20170607 00:02:39.776" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:02:39.776" starttime="20170607 00:02:39.712"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>2 minutes</arg>
+</arguments>
+<msg timestamp="20170607 00:02:39.776" level="TRACE">Arguments: [ '2 minutes' ]</msg>
+<msg timestamp="20170607 00:04:39.776" level="INFO">Slept 2 minutes</msg>
+<msg timestamp="20170607 00:04:39.777" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:04:39.777" starttime="20170607 00:02:39.776"></status>
+</kw>
+<kw name="Run script distributeCusres and update status" library="ShareScript">
+<msg timestamp="20170607 00:04:39.780" level="TRACE">Arguments: [  ]</msg>
+<kw name="Execute Command" library="SSHLibrary">
+<doc>Executes `command` on the remote machine and returns its outputs.</doc>
+<arguments>
+<arg>cd /var/www/html/manifest/IE5DEV.AIM/ACCS ; php distributeCusres.php</arg>
+</arguments>
+<msg timestamp="20170607 00:04:39.781" level="TRACE">Arguments: [ 'cd /var/www/html/manifest/IE5DEV.AIM/ACCS ; php distributeCusres.php' ]</msg>
+<msg timestamp="20170607 00:04:39.782" level="INFO">Executing command 'cd /var/www/html/manifest/IE5DEV.AIM/ACCS ; php distributeCusres.php'.</msg>
+<msg timestamp="20170607 00:04:39.783" level="DEBUG">[chan 7] Max packet in: 32768 bytes</msg>
+<msg timestamp="20170607 00:04:39.913" level="INFO">Command exited with return code 0.</msg>
+<msg timestamp="20170607 00:04:39.913" level="TRACE">Return: 'OUTBUX:/var/netbay/vas/ebxml/home/tg_test199/outbox/\n\rFILE:ACYNVV000I2ZE_102135574.xml\n\rSOURCE:/var/netbay/vas/ebxml/home/tg_test199/outbox/ACYNVV000I2ZE_102135574.xml\n\rDESC:../../AIM_Files/Input_Cusres/TG/ACYNVV000I2ZE_102135574.xml\n\rFILE:ACYNVV000I2Z4_102135564.xml\n\rSOURCE:/var/netbay/vas/ebxml/home/tg_test199/outbox/ACYNVV000I2Z4_102135564.xml\n\rDESC:../../AIM_Files/Input_Cusres/TG/ACYNVV000I2Z4_102135564.xml\n\rOUTBUX:/var/netbay/vas/ebxml/home/bfs_uat199/outbox/\n\rOUTBUX:/var/netbay/vas/ebxml/home/bags_uat199/outbox/\n\rOUTBUX:/var/netbay/vas/ebxml/home/bfsdmk_uat199/outbox/\n\r'</msg>
+<status status="PASS" endtime="20170607 00:04:39.913" starttime="20170607 00:04:39.780"></status>
+</kw>
+<kw name="Execute Command" library="SSHLibrary">
+<doc>Executes `command` on the remote machine and returns its outputs.</doc>
+<arguments>
+<arg>cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php</arg>
+</arguments>
+<msg timestamp="20170607 00:04:39.913" level="TRACE">Arguments: [ 'cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php' ]</msg>
+<msg timestamp="20170607 00:04:39.914" level="INFO">Executing command 'cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php'.</msg>
+<msg timestamp="20170607 00:04:39.914" level="DEBUG">[chan 8] Max packet in: 32768 bytes</msg>
+<msg timestamp="20170607 00:05:06.953" level="INFO">Command exited with return code 0.</msg>
+<msg timestamp="20170607 00:05:06.953" level="TRACE">Return: "\nselect VH_ID from vsedhead where VH_DocumentNumber = 'ACYNVV000I2Z4' and VH_status = 'Sent'\nUPDATE vsedhead VH set VH.VH_RecvControlNo = '23600607400000001', VH.VH_LastUpdate = '2017-06-07T00:05:48',VH.VH_status = 'Accepted' where VH_ID='843664'\nUPDATE vseddetail VD set VD.VD_status = 'Accepted' where VD_HID='843664'\nselect VH_ID from vsedhead where VH_DocumentNumber = 'ACYNVV000I2ZE' and VH_status = 'Sent'\nUPDATE vsedhead VH set VH.VH_RecvControlNo = '23600607400000002', VH.VH_LastUpdate = '2017-06-07T00:05:48',VH.VH_status = 'Accepted' where VH_ID='843674'\nUPDATE vseddetail VD set VD.VD_status = 'Accepted' where VD_HID='843674'\nSELECT VH.VH_ID, VD.VD_ID\n                           FROM vsedhead VH LEFT JOIN vseddetail VD\n                             ON VH.VH_ID = VD.VD_HID\n                          WHERE (VH.VH_UserID &lt;&gt; ''\n                            AND  VH.VH_UserID &lt;&gt; 'N/A'\n                            AND  VH.VH_MessageFunction &lt;&gt; ''\n                            AND  VD.VD_MessageFunction &lt;&gt; '')\n                            AND VH.VH_UserID = '31010006340000001'\n                            AND VH.VH_status = 'Pending'\n                            AND VD.VD_status = 'Pending'\n                          ORDER BY VH.VH_ID DESC\nfinish"</msg>
+<status status="PASS" endtime="20170607 00:05:06.954" starttime="20170607 00:04:39.913"></status>
+</kw>
+<msg timestamp="20170607 00:05:06.954" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:05:06.954" starttime="20170607 00:04:39.779"></status>
+</kw>
+<kw name="Check Database Flight should status Accepted">
+<arguments>
+<arg>23</arg>
+<arg>${FlightNo}</arg>
+<arg>${FlightDate}</arg>
+</arguments>
+<msg timestamp="20170607 00:05:06.955" level="TRACE">Arguments: [ ${Indicator}='23' | ${FlightNo}='TG 625' | ${FlightDate}='07062017' ]</msg>
+<kw name="Remove String" library="String">
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<arguments>
+<arg>${FlightNo}</arg>
+<arg>${SPACE}</arg>
+</arguments>
+<assign>
+<var>${FlightNoToQuery}</var>
+</assign>
+<msg timestamp="20170607 00:05:06.955" level="TRACE">Arguments: [ 'TG 625' | b' ' ]</msg>
+<msg timestamp="20170607 00:05:06.955" level="TRACE">Return: 'TG625'</msg>
+<msg timestamp="20170607 00:05:06.955" level="INFO">${FlightNoToQuery} = TG625</msg>
+<status status="PASS" endtime="20170607 00:05:06.955" starttime="20170607 00:05:06.955"></status>
+</kw>
+<kw name="Convert Date" library="DateTime">
+<doc>Converts between supported `date formats`.</doc>
+<arguments>
+<arg>${FlightDate}</arg>
+<arg>date_format=%d%m%Y</arg>
+</arguments>
+<assign>
+<var>${ConvFlightDate}</var>
+</assign>
+<msg timestamp="20170607 00:05:06.956" level="TRACE">Arguments: [ '07062017' | date_format='%d%m%Y' ]</msg>
+<msg timestamp="20170607 00:05:06.956" level="TRACE">Return: b'2017-06-07 00:00:00.000'</msg>
+<msg timestamp="20170607 00:05:06.956" level="INFO">${ConvFlightDate} = 2017-06-07 00:00:00.000</msg>
+<status status="PASS" endtime="20170607 00:05:06.956" starttime="20170607 00:05:06.956"></status>
+</kw>
+<kw name="Get Substring" library="String">
+<doc>Returns a substring from ``start`` index to ``end`` index.</doc>
+<arguments>
+<arg>${ConvFlightDate}</arg>
+<arg>0</arg>
+<arg>10</arg>
+</arguments>
+<assign>
+<var>${FlightDateToQuery}</var>
+</assign>
+<msg timestamp="20170607 00:05:06.957" level="TRACE">Arguments: [ b'2017-06-07 00:00:00.000' | '0' | '10' ]</msg>
+<msg timestamp="20170607 00:05:06.957" level="TRACE">Return: b'2017-06-07'</msg>
+<msg timestamp="20170607 00:05:06.957" level="INFO">${FlightDateToQuery} = 2017-06-07</msg>
+<status status="PASS" endtime="20170607 00:05:06.957" starttime="20170607 00:05:06.956"></status>
+</kw>
+<kw name="Query" library="DatabaseLibrary">
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional</doc>
+<arguments>
+<arg>SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' AND vsedhead.VH_DocumentType = '${Indicator}'</arg>
+</arguments>
+<assign>
+<var>${FlightData}</var>
+</assign>
+<msg timestamp="20170607 00:05:06.957" level="TRACE">Arguments: [ "SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG625' AND vseddetail.VD_FlightDate = '2017-06-07' AND vsedhead.VH_DocumentType = '23'" ]</msg>
+<msg timestamp="20170607 00:05:06.957" level="INFO">Executing : Query  |  SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG625' AND vseddetail.VD_FlightDate = '2017-06-07' AND vsedhead.VH_DocumentType = '23' </msg>
+<msg timestamp="20170607 00:05:06.993" level="TRACE">Return: ((b'Accepted',),)</msg>
+<msg timestamp="20170607 00:05:06.994" level="INFO">${FlightData} = (('Accepted',),)</msg>
+<status status="PASS" endtime="20170607 00:05:06.994" starttime="20170607 00:05:06.957"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${FlightData[0][0]}</arg>
+<arg>Accepted</arg>
+</arguments>
+<msg timestamp="20170607 00:05:06.994" level="TRACE">Arguments: [ b'Accepted' | 'Accepted' ]</msg>
+<msg timestamp="20170607 00:05:06.994" level="INFO">Argument types are:
+&lt;type 'str'&gt;
+&lt;type 'unicode'&gt;</msg>
+<msg timestamp="20170607 00:05:06.995" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:05:06.995" starttime="20170607 00:05:06.994"></status>
+</kw>
+<msg timestamp="20170607 00:05:06.995" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:05:06.995" starttime="20170607 00:05:06.954"></status>
+</kw>
+<kw type="teardown" name="Disconnect From Database" library="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<msg timestamp="20170607 00:05:06.996" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20170607 00:05:06.996" level="INFO">Executing : Disconnect From Database</msg>
+<msg timestamp="20170607 00:05:06.998" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:05:06.999" starttime="20170607 00:05:06.996"></status>
+</kw>
+<status status="PASS" endtime="20170607 00:05:06.999" critical="yes" starttime="20170607 00:02:39.711"></status>
 </test>
 <kw type="teardown" name="Close All Connections" library="SSHLibrary">
 <doc>Closes all open connections.</doc>
-<status status="PASS" endtime="20170606 01:49:09.684" starttime="20170606 01:49:09.566"></status>
+<msg timestamp="20170607 00:05:07.001" level="TRACE">Arguments: [  ]</msg>
+<msg timestamp="20170607 00:05:07.001" level="DEBUG">[chan 1] EOF sent (1)</msg>
+<msg timestamp="20170607 00:05:07.001" level="DEBUG">[chan 0] EOF sent (0)</msg>
+<msg timestamp="20170607 00:05:07.017" level="TRACE">Return: None</msg>
+<status status="PASS" endtime="20170607 00:05:07.017" starttime="20170607 00:05:07.000"></status>
 </kw>
-<status status="PASS" endtime="20170606 01:49:09.684" starttime="20170606 01:48:36.851"></status>
+<status status="PASS" endtime="20170607 00:05:07.017" starttime="20170607 00:02:07.819"></status>
 </suite>
 <statistics>
 <total>
-<stat fail="0" pass="2">Critical Tests</stat>
-<stat fail="0" pass="2">All Tests</stat>
+<stat fail="0" pass="4">Critical Tests</stat>
+<stat fail="0" pass="4">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat fail="0" id="s1" name="VSEDFFM" pass="2">VSEDFFM</stat>
+<stat fail="0" id="s1" name="VSEDMFI" pass="4">VSEDMFI</stat>
 </suite>
 </statistics>
 <errors>

@@ -1,0 +1,278 @@
+==============================================================================
+20170607 00:02:08.548 - INFO - + START SUITE: VSEDMFI [ ]
+==============================================================================
+20170607 00:02:08.549 - INFO - +- START SETUP: Open Connection And Log In [ ]
+20170607 00:02:08.550 - INFO - +-- START KW: SSHLibrary.Open Connection [ ${Host} | port=22 ]
+20170607 00:02:08.551 - INFO - +-- END KW: SSHLibrary.Open Connection (1)
+20170607 00:02:08.551 - INFO - +-- START KW: SSHLibrary.Login [ ${Username} | ${Password} | delay=0.5 ]
+20170607 00:02:08.551 - INFO - Logging into '10.2.3.72:22' as 'root'.
+20170607 00:02:09.271 - DEBUG - Adding ssh-rsa host key for 10.2.3.72: dfa0d2f8beb1fc5e69bc9c60d93b60d4
+20170607 00:02:09.445 - DEBUG - [chan 0] Max packet in: 32768 bytes
+20170607 00:02:10.499 - INFO - Read output: Last login: Tue Jun  6 23:43:03 2017 from 10.0.66.126
+[root@swebmf_uat ~]#
+20170607 00:02:10.499 - INFO - +-- END KW: SSHLibrary.Login (1948)
+20170607 00:02:10.499 - INFO - +- END SETUP: Open Connection And Log In (1950)
+------------------------------------------------------------------------------
+20170607 00:02:10.500 - INFO - +- START TEST: Put Message MFI From Local to Server [ ]
+------------------------------------------------------------------------------
+20170607 00:02:10.501 - INFO - +-- START SETUP: ShareScript.Connect To Database AirManifest [ ]
+20170607 00:02:10.501 - INFO - +--- START KW: DatabaseLibrary.Connect To Database [ pymysql | manifest_air_test | pattaraporn | pattaraporn@netbay | 10.1.3.72 | 3306 ]
+20170607 00:02:10.576 - INFO - Connecting using : pymysql.connect(db=manifest_air_test, user=pattaraporn, passwd=pattaraporn@netbay, host=10.1.3.72, port=3306, charset=None)
+20170607 00:02:10.632 - INFO - +--- END KW: DatabaseLibrary.Connect To Database (131)
+20170607 00:02:10.633 - INFO - +-- END SETUP: ShareScript.Connect To Database AirManifest (131)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:02:10.633 - INFO - +-- START KW: ShareScript.Put File From Local to Server [ ${Indicator} | ${fileName} ]
+20170607 00:02:10.634 - INFO - +--- START KW: SSHLibrary.Put File [ D:\\AutomateTest\\RobotFramework\\AirManifest\\Resource\\DataTestMSG\\${Indicator}\\${fileName}.txt | destination=/var/www/html/manifest/AIM_Files/Input_TG | mode=0744 ]
+20170607 00:02:10.635 - DEBUG - [chan 1] Max packet in: 32768 bytes
+20170607 00:02:10.698 - INFO - [chan 1] Opened sftp connection (server version 3)
+20170607 00:02:10.698 - DEBUG - [chan 1] normalize('.')
+20170607 00:02:10.713 - DEBUG - [chan 1] stat('/var/www/html/manifest/AIM_Files/Input_TG')
+20170607 00:02:10.729 - DEBUG - [chan 1] stat('/')
+20170607 00:02:10.746 - DEBUG - [chan 1] stat('/var')
+20170607 00:02:10.760 - DEBUG - [chan 1] stat('/var/www')
+20170607 00:02:10.771 - DEBUG - [chan 1] stat('/var/www/html')
+20170607 00:02:10.783 - DEBUG - [chan 1] stat('/var/www/html/manifest')
+20170607 00:02:10.796 - DEBUG - [chan 1] stat('/var/www/html/manifest/AIM_Files')
+20170607 00:02:10.809 - DEBUG - [chan 1] stat('/var/www/html/manifest/AIM_Files/Input_TG')
+20170607 00:02:10.822 - DEBUG - [chan 1] open('/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt', 'wb')
+20170607 00:02:10.833 - DEBUG - [chan 1] open('/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt', 'wb') -> 00000000
+20170607 00:02:10.834 - DEBUG - [chan 1] chmod('/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt', 484)
+20170607 00:02:10.849 - DEBUG - [chan 1] close(00000000)
+20170607 00:02:10.877 - INFO - 'D:\AutomateTest\RobotFramework\AirManifest\Resource\DataTestMSG\IMPORT\MFI_DataTest.txt' -> '/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt'
+20170607 00:02:10.878 - INFO - +--- END KW: SSHLibrary.Put File (244)
+20170607 00:02:10.879 - INFO - +-- END KW: ShareScript.Put File From Local to Server (245)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:02:10.879 - INFO - +-- START KW: ShareScript.Check File in Server should visible [ ${fileName} ]
+20170607 00:02:10.880 - INFO - +--- START KW: SSHLibrary.File Should Exist [ /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt ]
+20170607 00:02:10.880 - DEBUG - [chan 1] stat('/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt')
+20170607 00:02:10.894 - INFO - +--- END KW: SSHLibrary.File Should Exist (14)
+20170607 00:02:10.895 - INFO - +-- END KW: ShareScript.Check File in Server should visible (15)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:02:10.895 - INFO - +-- START KW: Prepare message to test [ ${fileName} | ${FlightNo} | ${FlightDate} ]
+20170607 00:02:10.896 - INFO - +--- START KW: SSHLibrary.Start Command [ cat /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt ]
+20170607 00:02:10.896 - INFO - Starting command 'cat /var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt'.
+20170607 00:02:10.897 - DEBUG - [chan 2] Max packet in: 32768 bytes
+20170607 00:02:10.930 - INFO - +--- END KW: SSHLibrary.Start Command (34)
+20170607 00:02:10.931 - INFO - +--- START KW: SSHLibrary.Read Command Output [ ]
+20170607 00:02:10.931 - INFO - Reading output of command 'cat /var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt'.
+20170607 00:02:10.941 - INFO - Command exited with return code 0.
+20170607 00:02:10.941 - INFO - ${GetContentVSED} = MFITG 624 29052017051011909
+218023570020003PK000000000037.00KGMHKHKGBKK23SHIP SPARES 2
+218022373030003PK000000000002.00KGMHKHKGBKK23CONSOL 3   
+;
+20170607 00:02:10.941 - INFO - +--- END KW: SSHLibrary.Read Command Output (10)
+20170607 00:02:10.941 - INFO - +--- START KW: String.Get Substring [ ${GetContentVSED} | 3 | 9 ]
+20170607 00:02:10.942 - INFO - ${Old_flightNo} = TG 624
+20170607 00:02:10.942 - INFO - +--- END KW: String.Get Substring (1)
+20170607 00:02:10.942 - INFO - +--- START KW: String.Get Substring [ ${GetContentVSED} | 10 | 18 ]
+20170607 00:02:10.943 - INFO - ${Old_flightDate} = 29052017
+20170607 00:02:10.943 - INFO - +--- END KW: String.Get Substring (1)
+20170607 00:02:10.943 - INFO - +--- START KW: SSHLibrary.Execute Command [ replace "${Old_flightNo}" "${flight}" -- /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt ]
+20170607 00:02:10.943 - INFO - Executing command 'replace "TG 624" "TG 625" -- /var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt'.
+20170607 00:02:10.944 - DEBUG - [chan 3] Max packet in: 32768 bytes
+20170607 00:02:11.040 - INFO - Command exited with return code 0.
+20170607 00:02:11.041 - INFO - +--- END KW: SSHLibrary.Execute Command (97)
+20170607 00:02:11.041 - INFO - +--- START KW: SSHLibrary.Execute Command [ replace "${Old_flightDate}" "${FlightDate}" -- /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt ]
+20170607 00:02:11.041 - INFO - Executing command 'replace "29052017" "07062017" -- /var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt'.
+20170607 00:02:11.042 - DEBUG - [chan 4] Max packet in: 32768 bytes
+20170607 00:02:11.132 - INFO - Command exited with return code 0.
+20170607 00:02:11.132 - INFO - +--- END KW: SSHLibrary.Execute Command (91)
+20170607 00:02:11.132 - INFO - +-- END KW: Prepare message to test (237)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:02:11.133 - INFO - +-- START TEARDOWN: DatabaseLibrary.Disconnect From Database [ ]
+20170607 00:02:11.133 - INFO - Executing : Disconnect From Database
+20170607 00:02:11.134 - INFO - +-- END TEARDOWN: DatabaseLibrary.Disconnect From Database (0)
+------------------------------------------------------------------------------
+20170607 00:02:11.137 - INFO - +- END TEST: Put Message MFI From Local to Server (635)
+------------------------------------------------------------------------------
+20170607 00:02:11.138 - INFO - +- START TEST: Parser Message MFI and Generate XML to Output folder [ ]
+------------------------------------------------------------------------------
+20170607 00:02:11.138 - INFO - +-- START SETUP: ShareScript.Connect To Database AirManifest [ ]
+20170607 00:02:11.139 - INFO - +--- START KW: DatabaseLibrary.Connect To Database [ pymysql | manifest_air_test | pattaraporn | pattaraporn@netbay | 10.1.3.72 | 3306 ]
+20170607 00:02:11.139 - INFO - Connecting using : pymysql.connect(db=manifest_air_test, user=pattaraporn, passwd=pattaraporn@netbay, host=10.1.3.72, port=3306, charset=None)
+20170607 00:02:11.190 - INFO - +--- END KW: DatabaseLibrary.Connect To Database (51)
+20170607 00:02:11.191 - INFO - +-- END SETUP: ShareScript.Connect To Database AirManifest (52)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:02:11.191 - INFO - +-- START KW: ShareScript.Run Script aim_main to parser Message [ ]
+20170607 00:02:11.192 - INFO - +--- START KW: SSHLibrary.Execute Command [ cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php ]
+20170607 00:02:11.192 - INFO - Executing command 'cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php'.
+20170607 00:02:11.192 - DEBUG - [chan 5] Max packet in: 32768 bytes
+20170607 00:02:38.513 - INFO - Command exited with return code 0.
+20170607 00:02:38.515 - INFO - +--- END KW: SSHLibrary.Execute Command (27323)
+20170607 00:02:38.517 - INFO - +-- END KW: ShareScript.Run Script aim_main to parser Message (27325)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:02:38.517 - INFO - +-- START KW: ShareScript.Check File should delete in Input path [ ${fileName} ]
+20170607 00:02:38.518 - INFO - +--- START KW: SSHLibrary.File Should Not Exist [ /var/www/html/manifest/AIM_Files/Input_TG/${fileName}.txt ]
+20170607 00:02:38.518 - DEBUG - [chan 1] stat('/var/www/html/manifest/AIM_Files/Input_TG/MFI_DataTest.txt')
+20170607 00:02:38.574 - INFO - +--- END KW: SSHLibrary.File Should Not Exist (55)
+20170607 00:02:38.574 - INFO - +-- END KW: ShareScript.Check File should delete in Input path (57)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:02:38.574 - INFO - +-- START KW: ShareScript.Check File should transfer in backup folder [ ${fileName} ]
+20170607 00:02:38.575 - INFO - +--- START KW: DateTime.Get Current Date [ ]
+20170607 00:02:38.575 - INFO - ${CurrentDate} = 2017-06-07 00:02:38.575
+20170607 00:02:38.575 - INFO - +--- END KW: DateTime.Get Current Date (0)
+20170607 00:02:38.576 - INFO - +--- START KW: String.Get Substring [ ${CurrentDate} | 0 | 4 ]
+20170607 00:02:38.576 - INFO - ${Year} = 2017
+20170607 00:02:38.576 - INFO - +--- END KW: String.Get Substring (0)
+20170607 00:02:38.576 - INFO - +--- START KW: String.Get Substring [ ${CurrentDate} | 5 | 7 ]
+20170607 00:02:38.577 - INFO - ${Month} = 06
+20170607 00:02:38.577 - INFO - +--- END KW: String.Get Substring (1)
+20170607 00:02:38.577 - INFO - +--- START KW: String.Get Substring [ ${CurrentDate} | 8 | 10 ]
+20170607 00:02:38.577 - INFO - ${Date} = 07
+20170607 00:02:38.577 - INFO - +--- END KW: String.Get Substring (0)
+20170607 00:02:38.577 - INFO - +--- START KW: SSHLibrary.File Should Exist [ /var/www/html/manifest/AIM_Files/Input_TG/backup/${Year}_${Month}_${Date}/${fileName}.txt ]
+20170607 00:02:38.578 - DEBUG - [chan 1] stat('/var/www/html/manifest/AIM_Files/Input_TG/backup/2017_06_07/MFI_DataTest.txt')
+20170607 00:02:38.594 - INFO - +--- END KW: SSHLibrary.File Should Exist (17)
+20170607 00:02:38.594 - INFO - +-- END KW: ShareScript.Check File should transfer in backup folder (20)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:02:38.594 - INFO - +-- START KW: Check database Flight should insert and status is Send [ 23 | ${FlightNo} | ${FlightDate} ]
+20170607 00:02:38.595 - INFO - +--- START KW: String.Remove String [ ${FlightNo} | ${SPACE} ]
+20170607 00:02:38.595 - INFO - ${FlightNoToQuery} = TG625
+20170607 00:02:38.595 - INFO - +--- END KW: String.Remove String (0)
+20170607 00:02:38.596 - INFO - +--- START KW: DateTime.Convert Date [ ${FlightDate} | date_format=%d%m%Y ]
+20170607 00:02:38.610 - INFO - ${ConvFlightDate} = 2017-06-07 00:00:00.000
+20170607 00:02:38.610 - INFO - +--- END KW: DateTime.Convert Date (14)
+20170607 00:02:38.610 - INFO - +--- START KW: String.Get Substring [ ${ConvFlightDate} | 0 | 10 ]
+20170607 00:02:38.610 - INFO - ${FlightDateToQuery} = 2017-06-07
+20170607 00:02:38.611 - INFO - +--- END KW: String.Get Substring (0)
+20170607 00:02:38.611 - INFO - +--- START KW: DatabaseLibrary.Query [ SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' AND vsedhead.VH_DocumentType = '${Indicator}' ]
+20170607 00:02:38.611 - INFO - Executing : Query  |  SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG625' AND vseddetail.VD_FlightDate = '2017-06-07' AND vsedhead.VH_DocumentType = '23'
+20170607 00:02:38.641 - INFO - ${FlightData} = (('Sent',),)
+20170607 00:02:38.641 - INFO - +--- END KW: DatabaseLibrary.Query (30)
+20170607 00:02:38.642 - INFO - +--- START KW: BuiltIn.Should Be Equal [ ${FlightData[0][0]} | Sent ]
+20170607 00:02:38.642 - INFO - Argument types are:
+<type 'str'>
+<type 'unicode'>
+20170607 00:02:38.642 - INFO - +--- END KW: BuiltIn.Should Be Equal (0)
+20170607 00:02:38.643 - INFO - +-- END KW: Check database Flight should insert and status is Send (48)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:02:38.643 - INFO - +-- START KW: Output folder should visible XML File [ 23 | ${FlightNo} | ${FlightDate} ]
+20170607 00:02:38.643 - INFO - +--- START KW: String.Remove String [ ${FlightNo} | ${SPACE} ]
+20170607 00:02:38.644 - INFO - ${FlightNoToQuery} = TG625
+20170607 00:02:38.644 - INFO - +--- END KW: String.Remove String (1)
+20170607 00:02:38.644 - INFO - +--- START KW: DateTime.Convert Date [ ${FlightDate} | date_format=%d%m%Y ]
+20170607 00:02:38.644 - INFO - ${ConvFlightDate} = 2017-06-07 00:00:00.000
+20170607 00:02:38.645 - INFO - +--- END KW: DateTime.Convert Date (1)
+20170607 00:02:38.645 - INFO - +--- START KW: String.Get Substring [ ${ConvFlightDate} | 0 | 10 ]
+20170607 00:02:38.645 - INFO - ${FlightDateToQuery} = 2017-06-07
+20170607 00:02:38.645 - INFO - +--- END KW: String.Get Substring (0)
+20170607 00:02:38.645 - INFO - +--- START KW: DatabaseLibrary.Query [ SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' AND vsedhead.VH_DocumentType = '${Indicator}' ]
+20170607 00:02:38.646 - INFO - Executing : Query  |  SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG625' AND vseddetail.VD_FlightDate = '2017-06-07' AND vsedhead.VH_DocumentType = '23'
+20170607 00:02:38.673 - INFO - ${DocumentNo} = (('ACYNVV000I2ZE',),)
+20170607 00:02:38.673 - INFO - +--- END KW: DatabaseLibrary.Query (28)
+20170607 00:02:38.673 - INFO - +--- START KW: SSHLibrary.File Should Exist [ /var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_${DocumentNo[0][0]}.xml ]
+20170607 00:02:38.674 - DEBUG - [chan 1] stat('/var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_ACYNVV000I2ZE.xml')
+20170607 00:02:38.686 - INFO - +--- END KW: SSHLibrary.File Should Exist (13)
+20170607 00:02:38.687 - INFO - +-- END KW: Output folder should visible XML File (43)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:02:38.687 - INFO - +-- START TEARDOWN: DatabaseLibrary.Disconnect From Database [ ]
+20170607 00:02:38.687 - INFO - Executing : Disconnect From Database
+20170607 00:02:38.688 - INFO - +-- END TEARDOWN: DatabaseLibrary.Disconnect From Database (1)
+------------------------------------------------------------------------------
+20170607 00:02:38.691 - INFO - +- END TEST: Parser Message MFI and Generate XML to Output folder (27551)
+------------------------------------------------------------------------------
+20170607 00:02:38.691 - INFO - +- START TEST: Sign XML File and Send to gateway [ ]
+------------------------------------------------------------------------------
+20170607 00:02:38.691 - INFO - +-- START SETUP: ShareScript.Connect To Database AirManifest [ ]
+20170607 00:02:38.692 - INFO - +--- START KW: DatabaseLibrary.Connect To Database [ pymysql | manifest_air_test | pattaraporn | pattaraporn@netbay | 10.1.3.72 | 3306 ]
+20170607 00:02:38.692 - INFO - Connecting using : pymysql.connect(db=manifest_air_test, user=pattaraporn, passwd=pattaraporn@netbay, host=10.1.3.72, port=3306, charset=None)
+20170607 00:02:38.745 - INFO - +--- END KW: DatabaseLibrary.Connect To Database (53)
+20170607 00:02:38.746 - INFO - +-- END SETUP: ShareScript.Connect To Database AirManifest (55)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:02:38.746 - INFO - +-- START KW: ShareScript.Run Script sign XML to send gateway [ ]
+20170607 00:02:38.747 - INFO - +--- START KW: SSHLibrary.Execute Command [ cd /var/www/html/manifest/AIM_Files/signManifestHttpOpt/ ; java -Dfile.encoding=utf-8 -jar SignOnlyHttpOption.jar -s /var/www/html/manifest/AIM_Files/Output_XML/TG -o /var/netbay/vas/ebxml/home/tg_test199/inbox -c /var/www/html/manifest/AIM_Files/CER/THAI_AIRWAYS.p12 -p 'Thaiair*7' ]
+20170607 00:02:38.747 - INFO - Executing command 'cd /var/www/html/manifest/AIM_Files/signManifestHttpOpt/ ; java -Dfile.encoding=utf-8 -jar SignOnlyHttpOption.jar -s /var/www/html/manifest/AIM_Files/Output_XML/TG -o /var/netbay/vas/ebxml/home/tg_test199/inbox -c /var/www/html/manifest/AIM_Files/CER/THAI_AIRWAYS.p12 -p 'Thaiair*7''.
+20170607 00:02:38.748 - DEBUG - [chan 6] Max packet in: 32768 bytes
+20170607 00:02:39.650 - INFO - Command exited with return code 0.
+20170607 00:02:39.651 - INFO - ${SignScript} = 8
+cert path : /var/www/html/manifest/AIM_Files/CER/THAI_AIRWAYS.p12
+cert password : Thaiair*7
+xml source folder : /var/www/html/manifest/AIM_Files/Output_XML/TG
+xml out folder : /var/netbay/vas/ebxml/...
+20170607 00:02:39.651 - INFO - +--- END KW: SSHLibrary.Execute Command (904)
+20170607 00:02:39.652 - INFO - +-- END KW: ShareScript.Run Script sign XML to send gateway (905)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:02:39.652 - INFO - +-- START KW: Output folder should not visible XML files [ 23 | ${FlightNo} | ${FlightDate} ]
+20170607 00:02:39.653 - INFO - +--- START KW: String.Remove String [ ${FlightNo} | ${SPACE} ]
+20170607 00:02:39.654 - INFO - ${FlightNoToQuery} = TG625
+20170607 00:02:39.654 - INFO - +--- END KW: String.Remove String (1)
+20170607 00:02:39.654 - INFO - +--- START KW: DateTime.Convert Date [ ${FlightDate} | date_format=%d%m%Y ]
+20170607 00:02:39.655 - INFO - ${ConvFlightDate} = 2017-06-07 00:00:00.000
+20170607 00:02:39.655 - INFO - +--- END KW: DateTime.Convert Date (1)
+20170607 00:02:39.655 - INFO - +--- START KW: String.Get Substring [ ${ConvFlightDate} | 0 | 10 ]
+20170607 00:02:39.657 - INFO - ${FlightDateToQuery} = 2017-06-07
+20170607 00:02:39.657 - INFO - +--- END KW: String.Get Substring (2)
+20170607 00:02:39.657 - INFO - +--- START KW: DatabaseLibrary.Query [ SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' AND vsedhead.VH_DocumentType = '${Indicator}' ]
+20170607 00:02:39.658 - INFO - Executing : Query  |  SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG625' AND vseddetail.VD_FlightDate = '2017-06-07' AND vsedhead.VH_DocumentType = '23'
+20170607 00:02:39.688 - INFO - ${DocumentNo} = (('ACYNVV000I2ZE',),)
+20170607 00:02:39.688 - INFO - +--- END KW: DatabaseLibrary.Query (31)
+20170607 00:02:39.689 - INFO - +--- START KW: SSHLibrary.File Should Not Exist [ /var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_${DocumentNo[0][0]}.xml ]
+20170607 00:02:39.689 - DEBUG - [chan 1] stat('/var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_ACYNVV000I2ZE.xml')
+20170607 00:02:39.708 - INFO - +--- END KW: SSHLibrary.File Should Not Exist (19)
+20170607 00:02:39.709 - INFO - +-- END KW: Output folder should not visible XML files (56)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:02:39.709 - INFO - +-- START TEARDOWN: DatabaseLibrary.Disconnect From Database [ ]
+20170607 00:02:39.710 - INFO - Executing : Disconnect From Database
+20170607 00:02:39.710 - INFO - +-- END TEARDOWN: DatabaseLibrary.Disconnect From Database (1)
+------------------------------------------------------------------------------
+20170607 00:02:39.711 - INFO - +- END TEST: Sign XML File and Send to gateway (1019)
+------------------------------------------------------------------------------
+20170607 00:02:39.712 - INFO - +- START TEST: Receive Response from gateway and update status [ ]
+------------------------------------------------------------------------------
+20170607 00:02:39.712 - INFO - +-- START SETUP: ShareScript.Connect To Database AirManifest [ ]
+20170607 00:02:39.713 - INFO - +--- START KW: DatabaseLibrary.Connect To Database [ pymysql | manifest_air_test | pattaraporn | pattaraporn@netbay | 10.1.3.72 | 3306 ]
+20170607 00:02:39.714 - INFO - Connecting using : pymysql.connect(db=manifest_air_test, user=pattaraporn, passwd=pattaraporn@netbay, host=10.1.3.72, port=3306, charset=None)
+20170607 00:02:39.775 - INFO - +--- END KW: DatabaseLibrary.Connect To Database (62)
+20170607 00:02:39.776 - INFO - +-- END SETUP: ShareScript.Connect To Database AirManifest (64)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:02:39.776 - INFO - +-- START KW: BuiltIn.Sleep [ 2 minutes ]
+20170607 00:04:39.776 - INFO - Slept 2 minutes
+20170607 00:04:39.779 - INFO - +-- END KW: BuiltIn.Sleep (120001)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:04:39.779 - INFO - +-- START KW: ShareScript.Run script distributeCusres and update status [ ]
+20170607 00:04:39.780 - INFO - +--- START KW: SSHLibrary.Execute Command [ cd /var/www/html/manifest/IE5DEV.AIM/ACCS ; php distributeCusres.php ]
+20170607 00:04:39.782 - INFO - Executing command 'cd /var/www/html/manifest/IE5DEV.AIM/ACCS ; php distributeCusres.php'.
+20170607 00:04:39.783 - DEBUG - [chan 7] Max packet in: 32768 bytes
+20170607 00:04:39.913 - INFO - Command exited with return code 0.
+20170607 00:04:39.913 - INFO - +--- END KW: SSHLibrary.Execute Command (133)
+20170607 00:04:39.913 - INFO - +--- START KW: SSHLibrary.Execute Command [ cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php ]
+20170607 00:04:39.914 - INFO - Executing command 'cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php'.
+20170607 00:04:39.914 - DEBUG - [chan 8] Max packet in: 32768 bytes
+20170607 00:05:06.953 - INFO - Command exited with return code 0.
+20170607 00:05:06.954 - INFO - +--- END KW: SSHLibrary.Execute Command (27041)
+20170607 00:05:06.954 - INFO - +-- END KW: ShareScript.Run script distributeCusres and update status (27175)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:05:06.954 - INFO - +-- START KW: Check Database Flight should status Accepted [ 23 | ${FlightNo} | ${FlightDate} ]
+20170607 00:05:06.955 - INFO - +--- START KW: String.Remove String [ ${FlightNo} | ${SPACE} ]
+20170607 00:05:06.955 - INFO - ${FlightNoToQuery} = TG625
+20170607 00:05:06.956 - INFO - +--- END KW: String.Remove String (0)
+20170607 00:05:06.956 - INFO - +--- START KW: DateTime.Convert Date [ ${FlightDate} | date_format=%d%m%Y ]
+20170607 00:05:06.956 - INFO - ${ConvFlightDate} = 2017-06-07 00:00:00.000
+20170607 00:05:06.956 - INFO - +--- END KW: DateTime.Convert Date (0)
+20170607 00:05:06.956 - INFO - +--- START KW: String.Get Substring [ ${ConvFlightDate} | 0 | 10 ]
+20170607 00:05:06.957 - INFO - ${FlightDateToQuery} = 2017-06-07
+20170607 00:05:06.957 - INFO - +--- END KW: String.Get Substring (1)
+20170607 00:05:06.957 - INFO - +--- START KW: DatabaseLibrary.Query [ SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' AND vsedhead.VH_DocumentType = '${Indicator}' ]
+20170607 00:05:06.957 - INFO - Executing : Query  |  SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = 'TG625' AND vseddetail.VD_FlightDate = '2017-06-07' AND vsedhead.VH_DocumentType = '23'
+20170607 00:05:06.994 - INFO - ${FlightData} = (('Accepted',),)
+20170607 00:05:06.994 - INFO - +--- END KW: DatabaseLibrary.Query (37)
+20170607 00:05:06.994 - INFO - +--- START KW: BuiltIn.Should Be Equal [ ${FlightData[0][0]} | Accepted ]
+20170607 00:05:06.994 - INFO - Argument types are:
+<type 'str'>
+<type 'unicode'>
+20170607 00:05:06.995 - INFO - +--- END KW: BuiltIn.Should Be Equal (1)
+20170607 00:05:06.995 - INFO - +-- END KW: Check Database Flight should status Accepted (41)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+20170607 00:05:06.996 - INFO - +-- START TEARDOWN: DatabaseLibrary.Disconnect From Database [ ]
+20170607 00:05:06.996 - INFO - Executing : Disconnect From Database
+20170607 00:05:06.999 - INFO - +-- END TEARDOWN: DatabaseLibrary.Disconnect From Database (3)
+------------------------------------------------------------------------------
+20170607 00:05:07.000 - INFO - +- END TEST: Receive Response from gateway and update status (147288)
+------------------------------------------------------------------------------
+20170607 00:05:07.000 - INFO - +- START TEARDOWN: SSHLibrary.Close All Connections [ ]
+20170607 00:05:07.001 - DEBUG - [chan 1] EOF sent (1)
+20170607 00:05:07.001 - DEBUG - [chan 0] EOF sent (0)
+20170607 00:05:07.017 - INFO - +- END TEARDOWN: SSHLibrary.Close All Connections (17)
+==============================================================================
+20170607 00:05:07.019 - INFO - + END SUITE: VSEDMFI (179198)
+==============================================================================

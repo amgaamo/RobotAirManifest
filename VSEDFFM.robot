@@ -19,8 +19,8 @@ ${Password}         netbay@123
 # Change data for test
 ${Indicator}        EXPORT
 ${fileName}         FFM_DataTest
-${FlightNo}         TG 600
-${FlightDate}       05JUN
+${FlightNo}         TG 620
+${FlightDate}       06JUN
 
 
 *** Testcases ***
@@ -41,9 +41,9 @@ Sign XML File and Send to gateway
       Output folder should not visible XML files                  22        ${FlightNo}       ${FlightDate}
 
 Receive Response from gateway and update status
-     Run script distributeCusres
-     Check response from gateway in folder Input cusres TG should visible
-     Check Database Flight should status Accepted
+     Sleep       2 minutes
+     Run script distributeCusres and update status
+     Check Database Flight should status Accepted                 22        ${FlightNo}       ${FlightDate}
 
 
 *** Keywords ***
@@ -110,3 +110,17 @@ Output folder should not visible XML files
         ${DocumentNo}    Query    SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' and vsedhead.VH_DocumentType = '${Indicator}'
 
         SSHLibrary.File Should Not Exist    /var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_${DocumentNo[0][0]}.xml
+
+
+Check Database Flight should status Accepted
+    [Arguments]      ${Indicator}       ${FlightNo}     ${FlightDate}
+        ${FlightNoToQuery}      Remove String           ${FlightNo}         ${SPACE}
+        
+        ${ConvFlightDate}               Convert Date                ${FlightDate}           date_format=%d%b
+        ${FlightDateResult}             String.Get Substring        ${ConvFlightDate}       0     10
+        ${CurrentDate}                  Get Current Date
+        ${FlightDateReplaceYear}        String.Get Substring        ${CurrentDate}          0       4
+        ${FlightDateToQuery}            String.Replace String       ${FlightDateResult}     1900        ${FlightDateReplaceYear}
+                
+        ${FlightData}    Query    SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' and vsedhead.VH_DocumentType = '${Indicator}'
+        Should Be Equal     ${FlightData[0][0]}    Accepted

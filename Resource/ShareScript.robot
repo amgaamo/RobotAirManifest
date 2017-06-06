@@ -20,9 +20,7 @@ Check File in Server should visible
 
 
 Run Script aim_main to parser Message
-    SSHLibrary.Start Command    cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php
-    ${parsermsg}=    Read Command Output
-    Log to console    ${parsermsg}
+    SSHLibrary.Execute Command    cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php
 
 
 Check File should delete in Input path
@@ -41,14 +39,8 @@ Check File should transfer in backup folder
 
 Run Script sign XML to send gateway
      ${SignScript}=    SSHLibrary.Execute Command    cd /var/www/html/manifest/AIM_Files/signManifestHttpOpt/ ; java -Dfile.encoding=utf-8 -jar SignOnlyHttpOption.jar -s /var/www/html/manifest/AIM_Files/Output_XML/TG -o /var/netbay/vas/ebxml/home/tg_test199/inbox -c /var/www/html/manifest/AIM_Files/CER/THAI_AIRWAYS.p12 -p 'Thaiair*7'
-     Log to console    ${SignScript}
+   
 
-
-Run script distributeCusres
-    SSHLibrary.Start Command    cd /var/www/html/manifest/IE5DEV.AIM/ACCS ; php distributeCusres.php
-    ${Distribute}=    Read Command Output
-    Log to console    ${Distribute}
-
-    SSHLibrary.Start Command    cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php
-    ${UpdateResponse}=    Read Command Output
-    Log to console    ${UpdateResponse}
+Run script distributeCusres and update status
+    SSHLibrary.Execute Command    cd /var/www/html/manifest/IE5DEV.AIM/ACCS ; php distributeCusres.php
+    SSHLibrary.Execute Command    cd /var/www/html/manifest/IE5DEV.AIM/AIM_TG/ ; php aim_main.php

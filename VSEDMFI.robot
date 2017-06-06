@@ -18,9 +18,9 @@ ${Password}         netbay@123
 
 # Change data for test
 ${Indicator}        IMPORT
-${fileName}         MFI_DataTest 
+${fileName}         MFI_DataTest
 ${FlightNo}         TG 625
-${FlightDate}       01062017
+${FlightDate}       07062017
 
 
 *** Testcases ***
@@ -40,10 +40,10 @@ Sign XML File and Send to gateway
       Run Script sign XML to send gateway
       Output folder should not visible XML files                  23        ${FlightNo}          ${FlightDate}
 
-# Receive Response from gateway and update status
-#      Run script distributeCusres
-#      Check response from gateway in folder Input cusres TG should visible
-#      Check Database Flight should status Accepted
+Receive Response from gateway and update status
+     Sleep       2 minutes
+     Run script distributeCusres and update status
+     Check Database Flight should status Accepted                 23        ${FlightNo}          ${FlightDate}
 
 
 *** Keywords ***
@@ -69,8 +69,8 @@ Check database Flight should insert and status is Send
         ${ConvFlightDate}       Convert Date            ${FlightDate}       date_format=%d%m%Y
         ${FlightDateToQuery}    String.Get Substring    ${ConvFlightDate}       0     10
     
-        ${FlightData}    Query    SELECT vsedhead.VH_DocumentType,vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' AND vsedhead.VH_DocumentType = '${Indicator}'
-        Should Be Equal    ${FlightData[0][1]}    Sent
+        ${FlightData}    Query    SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' AND vsedhead.VH_DocumentType = '${Indicator}'
+        Should Be Equal    ${FlightData[0][0]}    Sent
 
 
 Output folder should visible XML File
@@ -93,3 +93,13 @@ Output folder should not visible XML files
         ${DocumentNo}    Query    SELECT vsedhead.VH_DocumentNumber FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' AND vsedhead.VH_DocumentType = '${Indicator}'
 
         SSHLibrary.File Should Not Exist    /var/www/html/manifest/AIM_Files/Output_XML/TG/VSED_${DocumentNo[0][0]}.xml
+
+
+Check Database Flight should status Accepted
+    [Arguments]      ${Indicator}       ${FlightNo}     ${FlightDate}
+        ${FlightNoToQuery}      Remove String           ${FlightNo}         ${SPACE}
+        ${ConvFlightDate}       Convert Date            ${FlightDate}       date_format=%d%m%Y
+        ${FlightDateToQuery}    String.Get Substring    ${ConvFlightDate}       0     10
+    
+        ${FlightData}    Query    SELECT vsedhead.VH_Status FROM vsedhead LEFT JOIN vseddetail on vsedhead.VH_ID = vseddetail.VD_HID WHERE vsedhead.VH_TransportMeansJourneyID = '${FlightNoToQuery}' AND vseddetail.VD_FlightDate = '${FlightDateToQuery}' AND vsedhead.VH_DocumentType = '${Indicator}'
+        Should Be Equal    ${FlightData[0][0]}    Accepted
